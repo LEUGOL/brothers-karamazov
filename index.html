@@ -911,22 +911,114 @@ function selectSeat(floor, row, number){
 
 // 좌석표 그리기
 function renderSeatMap(){
-  const map = document.getElementById("seatMap");
+  const map=document.getElementById("seatMap");
+  if(!map)return;
 
-  if(!map) return;
+  const range=(start,end)=>{
+    return Array.from(
+      {length:end-start+1},
+      (_,i)=>i+start
+    );
+  };
 
-  map.innerHTML = `
-    <div class="seat-stage">STAGE</div>
-    <div class="empty">
-      좌석 배치 데이터를 연결하는 중이야.
-    </div>
-  `;
+  const rows1=[
+    [[],[9,10,11],[]],
+    [[6,7],range(8,24),[25,26]],
+    [[6,7],range(8,24),[25,26]],
+    [[5,6,7],range(8,24),[25,26,27]],
+    [[5,6,7],range(8,24),[25,26,27]],
+    [[4,5,6,7],range(8,24),[25,26,27,28]],
+    [[4,5,6,7],range(8,24),[25,26,27,28]],
+    [[3,4,5,6,7],range(8,24),[25,26,27,28,29]],
+    [[3,4,5,6,7],range(8,24),[25,26,27,28,29]],
+    [[2,3,4,5,6,7],range(8,24),[25,26,27,28,29,30]],
+    [[2,3,4,5,6,7],range(8,24),[25,26,27,28,29,30]],
+    [[1,2,3,4,5,6,7],range(8,24),range(25,31)],
+    [[1,2,3,4,5,6,7],range(8,24),range(25,31)],
+    [[1,2,3,4,5,6,7],range(8,24),range(25,31)]
+  ];
+
+  const rows2=[
+    [range(3,8),range(9,24),range(25,31)],
+    [range(3,8),range(9,24),range(25,31)],
+    [range(2,8),range(9,24),range(25,32)],
+    [range(1,8),range(9,24),range(25,33)],
+    [range(1,8),range(9,24),range(25,33)]
+  ];
+
+  const rows=currentSeatFloor==="1층"?rows1:rows2;
+  const floor=currentSeatFloor;
+
+  let html=`<div class="seat-stage">STAGE</div>`;
+
+  // 1층 휠체어석
+  if(floor==="1층"){
+    html+=`<div class="seat-wheelchair">`;
+
+    for(let i=1;i<=5;i++){
+      const number="D"+i;
+      const isSelected=
+        selectedSeat &&
+        selectedSeat.floor===floor &&
+        selectedSeat.row==="휠체어석" &&
+        selectedSeat.number===number;
+
+      html+=`
+        <button type="button"
+          style="${isSelected?'background:var(--plum);color:white;':''}"
+          onclick="selectSeat('1층','휠체어석','${number}')">
+          ${number}
+        </button>
+      `;
+    }
+
+    html+=`</div>`;
+  }
+
+  rows.forEach((blocks,index)=>{
+    const row=(index+1)+"열";
+
+    html+=`
+      <div class="seat-row">
+        <div class="seat-row-label">${index+1}열</div>
+        <div class="seat-blocks">
+    `;
+
+    blocks.forEach(block=>{
+      html+=`<div class="seat-block">`;
+
+      block.forEach(number=>{
+        const isSelected=
+          selectedSeat &&
+          selectedSeat.floor===floor &&
+          selectedSeat.row===row &&
+          String(selectedSeat.number)===String(number);
+
+        html+=`
+          <button type="button"
+            class="seat-cell ${isSelected?'selected':''}"
+            onclick="selectSeat('${floor}','${row}','${number}')">
+            ${number}
+          </button>
+        `;
+      });
+
+      html+=`</div>`;
+    });
+
+    html+=`
+        </div>
+      </div>
+    `;
+  });
+
+  map.innerHTML=html;
 
   if(selectedSeat){
-    document.getElementById("seatSelection").textContent =
-      `${selectedSeat.floor} ${selectedSeat.row}열 ${selectedSeat.number}번 선택`;
+    document.getElementById("seatSelection").textContent=
+      `${selectedSeat.floor} ${selectedSeat.row} ${selectedSeat.number}번 선택`;
   }else{
-    document.getElementById("seatSelection").textContent =
+    document.getElementById("seatSelection").textContent=
       "좌석표에서 관람한 자리를 선택해 줘.";
   }
 }
