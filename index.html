@@ -1370,7 +1370,9 @@ function createSeatMap(floor, mode="select"){
     .filter(s=>s.watched&&s.seat&&s.seat.floor===floor)
     .map(s=>s.seat);
 
-  let html=`<div class="seat-stage">STAGE</div>`;
+ let html = floor==="1층"
+  ? `<div class="seat-stage">STAGE</div>`
+  : "";
 
 rows.forEach((blocks,index)=>{
 const row=String(index+1);
