@@ -978,52 +978,80 @@ function createSeatMap(floor, mode="select"){
 
   let html=`<div class="seat-stage">STAGE</div>`;
 
-  rows.forEach((blocks,index)=>{
-    const rowClass = floor==="1층" && index===0
-  ? "seat-row first-row"
-  : "seat-row";
+rows.forEach((blocks,index)=>{
 
-html+=`
-  <div class="${rowClass}">
-    <div class="seat-row-label">${index+1}열</div>
-    <div class="seat-blocks">`;
+  const rowClass = floor==="1층" && index===0
+    ? "seat-row first-row"
+    : "seat-row";
 
-    blocks.forEach(block=>{
-      html+=`<div class="seat-block">`;
+  html+=`
+    <div class="${rowClass}">
+      <div class="seat-row-label">${index+1}열</div>
+      <div class="seat-blocks">`;
 
-      block.forEach(number=>{
-        const occupied=attendedSeats.some(seat=>
-          seat.row===row&&String(seat.number)===String(number)
-        );
+  function makeSeatButtons(numbers){
+    let seatHtml="";
 
-        if(mode==="select"){
-          const isSelected=selectedSeat&&
-            selectedSeat.floor===floor&&
-            selectedSeat.row===row&&
-            String(selectedSeat.number)===String(number);
+    numbers.forEach(number=>{
+      const occupied=attendedSeats.some(seat=>
+        seat.row===row&&String(seat.number)===String(number)
+      );
 
-          html+=`
-            <button type="button"
-              class="seat-cell ${isSelected?'selected':''}"
-              onclick="selectSeat('${floor}','${row}','${number}')">
-              ${number}
-            </button>`;
-        }else{
-          html+=`
-            <button type="button"
-              class="seat-cell ${occupied?'selected':''}"
-              disabled
-              title="${occupied?'관극한 좌석':'미관극 좌석'}">
-              ${number}
-            </button>`;
-        }
-      });
+      if(mode==="select"){
+        const isSelected=selectedSeat&&
+          selectedSeat.floor===floor&&
+          selectedSeat.row===row&&
+          String(selectedSeat.number)===String(number);
 
-      html+=`</div>`;
+        seatHtml+=`
+          <button type="button"
+            class="seat-cell ${isSelected?'selected':''}"
+            onclick="selectSeat('${floor}','${row}','${number}')">
+            ${number}
+          </button>`;
+      }else{
+        seatHtml+=`
+          <button type="button"
+            class="seat-cell ${occupied?'selected':''}"
+            disabled
+            title="${occupied?'관극한 좌석':'미관극 좌석'}">
+            ${number}
+          </button>`;
+      }
     });
 
-    html+=`</div></div>`;
-  });
+    return seatHtml;
+  }
+
+  if(floor==="1층" && index===0){
+
+    html+=`
+      <div class="seat-block"></div>
+      <div class="seat-block first-row-center">
+        <div class="seat-center-pair">
+          <div class="seat-group">
+            ${makeSeatButtons(blocks[0])}
+          </div>
+          <div class="seat-group">
+            ${makeSeatButtons(blocks[2])}
+          </div>
+        </div>
+      </div>
+      <div class="seat-block"></div>`;
+
+  }else{
+
+    blocks.forEach(block=>{
+      html+=`
+        <div class="seat-block">
+          ${makeSeatButtons(block)}
+        </div>`;
+    });
+
+  }
+
+  html+=`</div></div>`;
+});
 
   return html;
 }
