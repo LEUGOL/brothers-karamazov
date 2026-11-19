@@ -1119,12 +1119,15 @@ function renderSeatMap(){
   }
 }
 
-// MY SEATS 전체 관극 좌석표
+// MY SEATS 전체 관극 좌석표 - 1층과 2층 동시 표시
 function renderArchiveSeatMap(){
-  const map=document.getElementById("archiveSeatMap");
-  if(!map)return;
+  const map1=document.getElementById("archiveSeatMap1");
+  const map2=document.getElementById("archiveSeatMap2");
 
-  map.innerHTML=createSeatMap(archiveSeatFloor,"archive");
+  if(!map1||!map2)return;
+
+  map1.innerHTML=createSeatMap("1층","archive");
+  map2.innerHTML=createSeatMap("2층","archive");
 }
 function openSeatModal(id){
   activeScheduleId=id;
