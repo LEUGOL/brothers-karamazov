@@ -9,62 +9,74 @@
 <title>BROTHERS KARAMAZOV | MY THEATRE RECORD</title>
 
 <style>
+
 *{box-sizing:border-box}
+
 :root{
-  --black:#17131D;
-  --deep:#241B2B;
-  --purple:#302039;
-  --plum:#49304F;
-  --lilac:#B49AAF;
-  --pale:#E9E1E9;
-  --paper:#F5F0F5;
-  --line:#D9CEDB;
-  --muted:#897D8E;
-  --white:#FFFDFE;
+  --black:#E5DDE8;
+  --deep:#1C1721;
+  --purple:#38283E;
+  --plum:#624568;
+  --lilac:#A58BAA;
+  --pale:#D8CDD9;
+  --paper:#151219;
+  --line:#403645;
+  --muted:#9B8FA0;
+  --white:#211B27;
 }
+
 body{
   margin:0;
   background:var(--paper);
   color:var(--black);
   font-family:"Noto Serif KR","Batang",serif;
+  color-scheme:dark;
 }
+
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
+
 header{
-  background:linear-gradient(145deg,var(--black),var(--purple));
+  background:linear-gradient(145deg,#100D14,#302039);
   color:var(--pale);
   padding:48px 20px 38px;
   text-align:center;
-  border-bottom:4px solid var(--lilac);
+  border-bottom:3px solid var(--plum);
 }
+
 .eyebrow{
   font:11px Arial,sans-serif;
   letter-spacing:4px;
   color:var(--lilac);
 }
+
 header h1{
   font-size:clamp(25px,5vw,42px);
   letter-spacing:2px;
   line-height:1.35;
   margin:18px 0 8px;
 }
+
 header p{
   font-size:11px;
   letter-spacing:3px;
-  color:#C8B9CB;
+  color:#B9AABD;
 }
+
 .container{
   width:min(100% - 28px,1050px);
   margin:28px auto 60px;
 }
+
 .section{
   background:var(--white);
   border:1px solid var(--line);
   border-radius:3px;
   padding:22px;
   margin-bottom:18px;
-  box-shadow:0 5px 18px rgba(35,24,40,.045);
+  box-shadow:0 5px 20px rgba(0,0,0,.2);
 }
+
 .section-title{
   display:flex;
   justify-content:space-between;
@@ -74,140 +86,183 @@ header p{
   padding-bottom:12px;
   margin-bottom:18px;
 }
+
 .section-title h2{
   margin:0;
   font-size:17px;
   letter-spacing:1px;
-  color:var(--purple);
+  color:#D1BBD5;
 }
+
 .kicker{
   font:10px Arial,sans-serif;
   letter-spacing:2px;
   color:var(--muted);
 }
+
 .stats{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:10px;
 }
+
 .stat{
-  background:var(--deep);
+  background:#17121D;
+  border:1px solid #403247;
   color:var(--pale);
   text-align:center;
   padding:19px 8px;
 }
+
 .stat small{
   display:block;
   font-size:11px;
-  color:var(--lilac);
+  color:#B49AAF;
   margin-bottom:9px;
 }
+
 .stat strong{
   font-size:27px;
   font-weight:normal;
 }
+
 .stat span{font-size:12px}
+
 .form-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:12px;
 }
+
 .field{min-width:0}
 .field.full{grid-column:1/-1}
+
 label{
   display:block;
   font-size:12px;
   color:var(--muted);
   margin-bottom:6px;
 }
+
 input,select,textarea{
   width:100%;
   min-width:0;
   border:1px solid var(--line);
-  background:#FCFAFC;
+  background:#17131C;
   border-radius:2px;
   padding:10px;
   color:var(--black);
   outline:none;
 }
+
 input:focus,select:focus,textarea:focus{
-  border-color:var(--plum);
+  border-color:var(--lilac);
 }
+
+input::placeholder,textarea::placeholder{
+  color:#776B7D;
+}
+
 textarea{resize:vertical;min-height:90px}
+
 .btn{
   border:1px solid var(--plum);
   background:var(--purple);
-  color:white;
+  color:#F1EAF2;
   padding:10px 15px;
   font-size:12px;
   letter-spacing:.5px;
 }
+
+.btn:hover{
+  background:#49334F;
+}
+
 .btn.light{
   background:transparent;
-  color:var(--purple);
+  color:#C8B7CC;
 }
+
 .btn.danger{
-  border-color:#9B626C;
-  background:#9B626C;
+  border-color:#87515F;
+  background:#70414F;
 }
+
 .btn.small{padding:6px 9px;font-size:11px}
+
 .actions{
   display:flex;
   flex-wrap:wrap;
   gap:7px;
   margin-top:14px;
 }
+
 .table-wrap{overflow-x:auto}
+
 table{
   border-collapse:collapse;
   width:100%;
   min-width:650px;
   font-size:12px;
 }
+
 th{
-  background:var(--deep);
-  color:var(--pale);
+  background:#19141F;
+  color:#D8CDD9;
   font-weight:normal;
   padding:11px 8px;
   white-space:nowrap;
 }
+
 td{
-  border-bottom:1px solid #EAE3EB;
+  border-bottom:1px solid #39303F;
   padding:10px 8px;
   text-align:center;
+  color:#D3C9D6;
 }
-tr.attended{background:#F2EAF3}
-tr.attended td:first-child{border-left:3px solid var(--plum)}
+
+tr.attended{
+  background:#302437;
+}
+
+tr.attended td:first-child{
+  border-left:3px solid var(--lilac);
+}
+
 .empty{
   text-align:center;
   color:var(--muted);
   padding:28px 10px;
   font-size:13px;
 }
+
 .schedule-tools{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
   margin-bottom:14px;
 }
+
 .schedule-tools input{flex:1;min-width:130px}
+
 .actor-list{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:9px;
 }
+
 .actor-card{
-  border:1px solid var(--line);
-  border-radius:8px;
+  border:1px solid #45374B;
+  border-radius:5px;
   padding:15px;
-  background:#211B27;
+  background:#19151F;
 }
 
 .actor-card strong{
   display:block;
   font-size:14px;
-  color:#C5AFCB;
-  letter-spacing:0.5px;
+  color:#D0BBD5;
+  letter-spacing:.5px;
 }
 
 .actor-card span{
@@ -217,24 +272,30 @@ tr.attended td:first-child{border-left:3px solid var(--plum)}
   font-size:12px;
   line-height:1.6;
 }
+
 .seat-summary{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:8px;
 }
+
 .seat-item{
   border:1px solid var(--line);
   padding:12px;
-  background:#FCFAFC;
+  background:#19151F;
   font-size:12px;
+  color:#D3C9D6;
 }
-.seat-item strong{color:var(--purple)}
+
+.seat-item strong{color:#D0BBD5}
+
 .note-card{
   border:1px solid var(--line);
   padding:15px;
   margin-bottom:10px;
-  background:#FCFAFC;
+  background:#19151F;
 }
+
 .note-head{
   display:flex;
   justify-content:space-between;
@@ -242,14 +303,19 @@ tr.attended td:first-child{border-left:3px solid var(--plum)}
   flex-wrap:wrap;
   margin-bottom:8px;
 }
-.note-head strong{color:var(--purple)}
-.stars{color:#755D7C;letter-spacing:2px}
+
+.note-head strong{color:#D0BBD5}
+
+.stars{color:#B49AAF;letter-spacing:2px}
+
 .note-card p{
   white-space:pre-wrap;
   font-size:13px;
   line-height:1.7;
   margin:8px 0 0;
+  color:#D3C9D6;
 }
+
 footer{
   text-align:center;
   padding:25px 10px;
@@ -257,30 +323,35 @@ footer{
   font:10px Arial,sans-serif;
   letter-spacing:2px;
 }
+
 .modal{
   display:none;
   position:fixed;
   inset:0;
   z-index:20;
-  background:rgba(15,10,18,.72);
+  background:rgba(5,3,8,.82);
   padding:18px;
   align-items:center;
   justify-content:center;
 }
+
 .modal.show{display:flex}
+
 .modal-box{
-  background:var(--paper);
+  background:#1C1722;
   width:min(100%,520px);
   max-height:90vh;
   overflow:auto;
   padding:22px;
-  border:1px solid var(--lilac);
+  border:1px solid #57445D;
 }
+
 .modal-title{
-  color:var(--purple);
+  color:#D8C6DC;
   font-size:18px;
   margin:0 0 18px;
 }
+
 .checkline{
   display:flex;
   align-items:center;
@@ -288,8 +359,11 @@ footer{
   font-size:12px;
   margin-top:12px;
 }
+
 .checkline input{width:auto}
-  /* SEAT MAP */
+
+/* SEAT MAP */
+
 .seat-floor-tabs{
   display:flex;
   gap:8px;
@@ -301,7 +375,7 @@ footer{
   padding:11px;
   border:1px solid var(--line);
   background:transparent;
-  color:var(--purple);
+  color:var(--black);
   font-size:13px;
 }
 
@@ -311,11 +385,20 @@ footer{
   border-color:var(--purple);
 }
 
+.seat-floor-heading{
+  margin:20px 0 8px;
+  padding-bottom:7px;
+  border-bottom:1px solid var(--line);
+  color:#CBB5D0;
+  font-size:14px;
+  letter-spacing:1px;
+}
+
 .seat-map-wrap{
   overflow-x:auto;
   padding:12px 4px;
-  background:#F0EBF0;
-  border:1px solid var(--line);
+  background:#17131D;
+  border:1px solid #403645;
 }
 
 .seat-map{
@@ -327,9 +410,10 @@ footer{
   margin:0 auto 20px;
   padding:6px;
   text-align:center;
-  border:1px solid var(--purple);
-  color:var(--purple);
+  border:1px solid #806B87;
+  color:#C8B7CC;
   font:12px Arial,sans-serif;
+  background:#211A27;
 }
 
 .seat-row{
@@ -347,11 +431,10 @@ footer{
   color:var(--muted);
 }
 
-
 .seat-blocks{
   flex:1;
   display:grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr) minmax(0, 1fr);
+  grid-template-columns:minmax(0,1fr) minmax(0,2.4fr) minmax(0,1fr);
   justify-content:stretch;
   column-gap:14px;
   min-width:0;
@@ -363,22 +446,18 @@ footer{
   min-width:0;
 }
 
-/* 좌블: 중블 방향으로 정렬 */
 .seat-blocks > .seat-block:nth-child(1){
   justify-content:flex-end;
 }
 
-/* 중블: 중앙 정렬 */
 .seat-blocks > .seat-block:nth-child(2){
   justify-content:center;
 }
 
-/* 우블: 중블 방향으로 정렬 */
 .seat-blocks > .seat-block:nth-child(3){
   justify-content:flex-start;
 }
 
-/* 1층 1열 중블 */
 .first-row-center{
   width:100%;
 }
@@ -400,25 +479,26 @@ footer{
   height:19px;
   padding:0;
   flex-shrink:0;
-  border:1px solid #8E8290;
-  background:#FFFDFE;
+  border:1px solid #625568;
+  background:#302A35;
   border-radius:0;
   font-size:9px;
   line-height:17px;
   text-align:center;
-  color:#302536;
+  color:#D9D0DD;
   font-weight:600;
 }
 
 .seat-cell.selected{
-  background:var(--plum);
-  border-color:var(--plum);
+  background:#795B80;
+  border-color:#B49AAF;
+  color:#FFF9FF;
 }
 
 .seat-cell:disabled{
-  opacity:.35;
+  opacity:.65;
 }
-/* 휠체어석 */
+
 .seat-wheelchair{
   display:flex;
   justify-content:center;
@@ -429,9 +509,9 @@ footer{
 .seat-wheelchair button{
   width:32px;
   height:25px;
-  border:1px solid #81718A;
-  background:#E4DCE8;
-  color:#49304F;
+  border:1px solid #716078;
+  background:#302638;
+  color:#D8C9DC;
   font-size:9px;
   padding:0;
 }
@@ -440,7 +520,6 @@ footer{
   opacity:.5;
 }
 
-/* 좌석 구역 이름 */
 .seat-block-name{
   text-align:center;
   font-size:9px;
@@ -448,24 +527,31 @@ footer{
   margin-bottom:5px;
 }
 
-/* 선택 좌석 표시 */
-.seat-cell.selected{
-  background:var(--plum);
-  border-color:var(--plum);
-  color:white;
+.seat-selection{
+  margin-top:14px;
+  padding:12px;
+  background:#17131D;
+  border:1px solid var(--line);
+  color:#D8C6DC;
+  font-size:12px;
+  text-align:center;
 }
+
 @media(max-width:600px){
   .seat-map-wrap{
     margin:0 -5px;
   }
+
   .seat-cell{
     width:17px;
     height:17px;
   }
+
   .seat-blocks{
     gap:10px;
   }
 }
+
 @media(max-width:600px){
   header{padding:38px 14px 30px}
   .container{width:calc(100% - 20px);margin-top:16px}
@@ -479,7 +565,8 @@ footer{
   .actor-list{grid-template-columns:1fr}
   .seat-summary{grid-template-columns:1fr}
 }
-  @media(min-width:601px){
+
+@media(min-width:601px){
   .seat-center-pair{
     padding-left:0;
     padding-right:0;
@@ -487,6 +574,7 @@ footer{
     justify-content:center;
   }
 }
+
 </style>
 </head>
 
