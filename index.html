@@ -386,7 +386,42 @@ footer{
   font-size:12px;
   text-align:center;
 }
+/* 휠체어석 */
+.seat-wheelchair{
+  display:flex;
+  justify-content:center;
+  gap:5px;
+  margin:8px 0 14px;
+}
 
+.seat-wheelchair button{
+  width:32px;
+  height:25px;
+  border:1px solid #81718A;
+  background:#E4DCE8;
+  color:#49304F;
+  font-size:9px;
+  padding:0;
+}
+
+.seat-wheelchair button:disabled{
+  opacity:.5;
+}
+
+/* 좌석 구역 이름 */
+.seat-block-name{
+  text-align:center;
+  font-size:9px;
+  color:var(--muted);
+  margin-bottom:5px;
+}
+
+/* 선택 좌석 표시 */
+.seat-cell.selected{
+  background:var(--plum);
+  border-color:var(--plum);
+  color:white;
+}
 @media(max-width:600px){
   .seat-map-wrap{
     margin:0 -5px;
