@@ -901,6 +901,7 @@ function getSchedule(id){
 function render(){
   renderSchedules();
   renderStats();
+  renderActors();
   renderCast();
   renderSeats();
   renderArchiveSeatMap();
@@ -982,6 +983,36 @@ const castMembers = [
     actors: ["조재철", "조영훈", "양찬영"]
   }
 ];
+
+function renderActors(){
+  const container = document.getElementById("actorStats");
+  if(!container) return;
+
+  container.innerHTML = castMembers.map(member => {
+    const actorStats = member.actors.map(actor => {
+      const count = schedules.filter(schedule =>
+        schedule.watched &&
+        schedule[roles.find(([key, role]) => role === member.role)?.[0]] === actor
+      ).length;
+
+      return `
+        <div class="actor-card">
+          <span class="actor-name">${actor}</span>
+          <span class="actor-count">${count}회</span>
+        </div>
+      `;
+    }).join("");
+
+    return `
+      <div class="actor-role-group">
+        <h3>${member.role}</h3>
+        <div class="actor-grid">
+          ${actorStats}
+        </div>
+      </div>
+    `;
+  }).join("");
+}
 
 function renderCast(){
   const box = document.getElementById("castMembers");
