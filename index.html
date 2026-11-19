@@ -719,6 +719,183 @@ footer{
 .rating-star:hover{
   transform:scale(1.15);
 }
+  
+/* HUMAN STYLE BOX DESIGN - BROTHERS KARAMAZOV */
+
+/* 전체 배경 */
+body{
+  padding:12px 8px;
+  background-color:#17131B;
+  background-image:
+    linear-gradient(
+      rgba(23,19,27,.38),
+      rgba(23,19,27,.38)
+    ),
+    url("brothers-background.png");
+  background-size:cover;
+  background-position:center top;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+
+/* 상단 제목 상자 */
+header{
+  width:100%;
+  max-width:1000px;
+  margin:0 auto 10px;
+  padding:24px 20px;
+  border:1px solid rgba(116,92,124,.65);
+  border-radius:10px;
+  box-shadow:0 5px 18px rgba(0,0,0,.22);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(28,23,33,.88),
+      rgba(56,40,62,.82)
+    );
+}
+
+header h1{
+  font-size:24px;
+  letter-spacing:2px;
+  margin:12px 0 7px;
+}
+
+header p{
+  font-size:11px;
+  letter-spacing:2px;
+}
+
+.eyebrow{
+  font-size:9px;
+  letter-spacing:3px;
+}
+
+/* 본문 너비 */
+.container{
+  width:100%;
+  max-width:1000px;
+  margin:0 auto;
+}
+
+/* 인간실격처럼 독립된 둥근 상자 */
+.section{
+  background:rgba(33,27,39,.68);
+  border:1px solid rgba(91,73,99,.65);
+  border-radius:10px;
+  padding:14px;
+  margin-bottom:10px;
+  box-shadow:0 4px 15px rgba(0,0,0,.16);
+}
+
+/* 상자 제목 */
+.section-title{
+  padding-bottom:10px;
+  margin-bottom:13px;
+  border-bottom:1px solid rgba(165,139,170,.32);
+}
+
+.section-title h2{
+  font-size:16px;
+  color:#D8C5DC;
+}
+
+/* 통계 상자 */
+.stat{
+  background:rgba(23,18,29,.65);
+  border:1px solid rgba(96,75,105,.65);
+  border-radius:8px;
+}
+
+/* 배우 카드 */
+.cast-role-card,
+.actor-role-group{
+  background:rgba(30,24,36,.62);
+  border:1px solid rgba(111,87,119,.55);
+  border-radius:8px;
+}
+
+/* 좌석 및 후기 카드 */
+.seat-item,
+.note-card{
+  background:rgba(25,21,31,.68);
+  border:1px solid rgba(91,73,99,.65);
+  border-radius:8px;
+}
+
+/* 입력 영역 */
+input,select,textarea{
+  background:rgba(23,19,28,.82);
+  border:1px solid rgba(91,73,99,.75);
+  border-radius:6px;
+}
+
+/* 표 */
+th{
+  background:rgba(25,20,31,.88);
+}
+
+td{
+  border-bottom:1px solid rgba(91,73,99,.45);
+}
+
+/* 버튼 */
+.btn{
+  border-radius:6px;
+}
+
+/* 모바일 */
+@media(max-width:600px){
+  body{
+    padding:4px 3px;
+    background-size:100% auto;
+    background-position:center top;
+    background-repeat:repeat-y;
+    background-attachment:scroll;
+  }
+
+  header{
+    padding:16px 12px;
+    margin-bottom:7px;
+    border-radius:8px;
+  }
+
+  header h1{
+    font-size:19px;
+    letter-spacing:1.5px;
+    margin:9px 0 6px;
+  }
+
+  header p{
+    font-size:9px;
+  }
+
+  .container{
+    width:100%;
+    margin:0 auto;
+  }
+
+  .section{
+    padding:9px 7px;
+    margin-bottom:7px;
+    border-radius:8px;
+  }
+
+  .section-title{
+    margin-bottom:10px;
+    padding-bottom:8px;
+  }
+
+  .section-title h2{
+    font-size:14px;
+  }
+
+  .kicker{
+    font-size:8px;
+    letter-spacing:1px;
+  }
+}
+
 </style>
 </head>
 
@@ -752,7 +929,6 @@ footer{
     <strong id="watchedCount">0</strong><span> 회</span>
   </div>
 </div>
-  </section>
   </section>
 
   <!-- MY ACTOR COUNT -->
