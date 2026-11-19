@@ -354,7 +354,7 @@ footer{
             <th>이반</th>
             <th>알료샤</th>
             <th>스메르자코프</th>
-            <th>파이시우스</th>
+            <th>피아니스트</th>
             <th>관극</th>
             <th>좌석</th>
           </tr>
@@ -465,7 +465,7 @@ footer{
         <input id="newSmerdyakov" placeholder="배우 이름">
       </div>
       <div class="field">
-        <label>파이시우스</label>
+        <label>피아니스트</label>
         <input id="newPaisius" placeholder="배우 이름">
       </div>
     </div>
@@ -521,7 +521,7 @@ const roles = [
   ["ivan","이반"],
   ["alyosha","알료샤"],
   ["smerdyakov","스메르자코프"],
-  ["paisius","파이시우스"]
+  ["paisius","피아니스트"]
 ];
 
 function saveAll(){
@@ -601,15 +601,24 @@ function renderStats(){
     schedules.filter(s=>s.watched && s.seat).length;
 }
 
-function renderActors(){
-  const box=document.getElementById("actorStats");
-  box.innerHTML=roles.map(([key,label])=>{
-    const count=schedules.filter(s=>s.watched && s[key]).length;
-    return `<div class="actor-card">
-      <strong>${label}</strong>
-      <span>함께한 관극 ${count}회</span>
-    </div>`;
-  }).join("");
+const castMembers = [
+  { role: "표도르", actors: [] },
+  { role: "드미트리", actors: [] },
+  { role: "이반", actors: [] },
+  { role: "알료샤", actors: [] },
+  { role: "스메르자코프", actors: [] },
+  { role: "피아니스트", actors: [] }
+];
+
+function renderCast(){
+  const box = document.getElementById("castMembers");
+
+  box.innerHTML = castMembers.map(member => `
+    <div class="actor-card">
+      <strong>${member.role}</strong>
+      <span>${member.actors.length ? member.actors.join(" · ") : "배우 명단 준비 중"}</span>
+    </div>
+  `).join("");
 }
 
 function renderSeats(){
