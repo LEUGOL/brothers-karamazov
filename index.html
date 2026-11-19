@@ -610,6 +610,56 @@ footer{
     background-attachment:scroll !important;
   }
 }
+  
+#actorStats{
+  display:grid;
+  grid-template-columns:repeat(6, minmax(125px, 1fr));
+  gap:12px;
+  overflow-x:auto;
+  padding:8px 2px 14px;
+}
+
+.actor-role-group{
+  min-width:125px;
+  padding:12px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid #403645;
+  border-radius:10px;
+}
+
+.actor-role-group h3{
+  margin:0 0 12px;
+  padding-bottom:9px;
+  border-bottom:1px solid #514657;
+  font-size:14px;
+  color:#eee5f2;
+}
+
+.actor-list{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.actor-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:6px;
+  font-size:12px;
+}
+
+.actor-name{
+  color:#eee8f0;
+  white-space:nowrap;
+}
+
+.actor-count{
+  color:#b9a8c5;
+  white-space:nowrap;
+  font-size:11px;
+}
+
 </style>
 </head>
 
