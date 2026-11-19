@@ -1161,6 +1161,11 @@ document.getElementById("filterSchedule").addEventListener("change",renderSchedu
 
 render();
 
+// 좌석표 임시 미리보기
+document.getElementById("seatModalDate").textContent = "좌석표 미리보기";
+document.getElementById("seatModal").classList.add("show");
+setSeatFloor("1층");
+
 </script>
 </body>
 </html>
