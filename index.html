@@ -965,17 +965,22 @@ function saveSeat(){
 
   const row=document.getElementById("seatRow").value.trim();
   const number=document.getElementById("seatNumber").value.trim();
+  const floor=document.getElementById("seatFloor").value;
+
   if(!row||!number){
-    alert("열과 좌석 번호를 입력해 줘.");
+    alert("관람한 좌석을 선택해 줘.");
     return;
   }
 
   s.watched=true;
   s.seat={
-    floor:document.getElementById("seatFloor").value,
-    row,number
+    floor,
+    row,
+    number
   };
+
   saveAll();
+  selectedSeat=null;
   closeSeatModal();
   render();
 }
