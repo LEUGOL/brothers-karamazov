@@ -694,6 +694,30 @@ footer{
 #archiveSeatMap2 .seat-cell{
   cursor:default;
 }
+  /* MY NOTES STAR RATING */
+.note-rating{
+  display:flex;
+  gap:7px;
+  align-items:center;
+}
+
+.rating-star{
+  border:0;
+  background:transparent;
+  padding:2px;
+  color:#65566B;
+  font-size:28px;
+  cursor:pointer;
+  transition:color .15s ease, transform .15s ease;
+}
+
+.rating-star.selected{
+  color:#C1A5C8;
+}
+
+.rating-star:hover{
+  transform:scale(1.15);
+}
 </style>
 </head>
 
@@ -955,7 +979,15 @@ const STORAGE = {
 let schedules = JSON.parse(localStorage.getItem(STORAGE.schedules) || "[]");
 let notes = JSON.parse(localStorage.getItem(STORAGE.notes) || "[]");
 let activeScheduleId = null;
+let noteRating = 5;
 
+function setNoteRating(value){
+  noteRating = value;
+
+  document.querySelectorAll(".rating-star").forEach((star,index)=>{
+    star.classList.toggle("selected",index < value);
+  });
+}
 const roles = [
   ["fyodor","표도르"],
   ["dmitri","드미트리"],
@@ -1553,22 +1585,31 @@ function saveSeat(){
 function addNote(){
   const scheduleId=document.getElementById("noteSchedule").value;
   const text=document.getElementById("noteText").value.trim();
-  const rating=Number(document.getElementById("noteRating").value);
 
   if(!scheduleId){
     alert("후기를 작성할 공연을 선택해 줘.");
     return;
   }
+
   if(!text){
     alert("후기 내용을 입력해 줘.");
     return;
   }
 
   notes.push({
-    id:makeId(),scheduleId,text,rating,created:Date.now()
+    id:makeId(),
+    scheduleId,
+    text,
+    rating:noteRating,
+    created:Date.now()
   });
+
   saveAll();
+
   document.getElementById("noteText").value="";
+  noteRating=5;
+  setNoteRating(5);
+
   renderNotes();
 }
 
