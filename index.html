@@ -304,26 +304,28 @@ footer{
 </header>
 
 <main class="container">
-
+<section class="section">
+  <div class="section-title">
+    <h2>CAST MEMBERS</h2>
+    <span class="kicker">CHARACTERS & ACTORS</span>
+  </div>
+  <div class="actor-list" id="castMembers"></div>
+</section>
   <section class="section">
     <div class="section-title">
       <h2>MY RECORD</h2>
       <span class="kicker">ATTENDANCE</span>
     </div>
-    <div class="stats">
-      <div class="stat">
-        <small>전체 등록 회차</small>
-        <strong id="totalCount">0</strong><span> 회</span>
-      </div>
-      <div class="stat">
-        <small>나의 관극 횟수</small>
-        <strong id="watchedCount">0</strong><span> 회</span>
-      </div>
-      <div class="stat">
-        <small>관람 좌석 수</small>
-        <strong id="seatCount">0</strong><span> 석</span>
-      </div>
-    </div>
+  <div class="stats">
+  <div class="stat">
+    <small>전체 등록 회차</small>
+    <strong id="totalCount">0</strong><span> 회</span>
+  </div>
+  <div class="stat">
+    <small>나의 관극 횟수</small>
+    <strong id="watchedCount">0</strong><span> 회</span>
+  </div>
+</div>
   </section>
 
   <section class="section">
@@ -364,14 +366,6 @@ footer{
     <div class="actions">
       <button class="btn" onclick="openScheduleModal()">+ 공연 일정 추가</button>
     </div>
-  </section>
-
-  <section class="section">
-    <div class="section-title">
-      <h2>MY ACTOR COUNT</h2>
-      <span class="kicker">ACTORS</span>
-    </div>
-    <div class="actor-list" id="actorStats"></div>
   </section>
 
   <section class="section">
