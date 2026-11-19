@@ -920,12 +920,87 @@ header h1{
     margin:8px 0;
   }
 }
+  /* HUMAN SILGYEOK LAYOUT */
+body{
+  padding:12px 8px;
+}
+
+.container{
+  width:100%;
+  max-width:1000px;
+  margin:0 auto;
+}
+
+header{
+  padding:24px 20px;
+  margin-bottom:10px;
+  border:0;
+  border-radius:10px;
+  text-align:left;
+}
+
+header h1{
+  font-size:clamp(22px,4vw,30px);
+  line-height:1.25;
+  margin:10px 0 6px;
+}
+
+header p{
+  margin:0;
+  font-size:12px;
+}
+
+.section{
+  border-radius:10px;
+  padding:14px;
+  margin-bottom:10px;
+  box-shadow:0 3px 12px rgba(23,19,29,.06);
+}
+
+.stat,
+.actor-card,
+.seat-item,
+.note-card{
+  border-radius:8px;
+}
+
+@media(max-width:600px){
+  body{
+    padding:4px 3px;
+  }
+
+  header{
+    padding:16px 12px;
+    margin-bottom:7px;
+    border-radius:8px;
+  }
+
+  header h1{
+    font-size:21px;
+    margin:8px 0 5px;
+  }
+
+  .container{
+    width:100%;
+    margin:0 auto;
+  }
+
+  .section{
+    padding:9px 7px;
+    margin-bottom:7px;
+    border-radius:8px;
+  }
+}
 </style>
 </head>
 
 <body>
+<main class="container">
+
 <header>
+  <div class="eyebrow">FYODOR DOSTOEVSKY</div>
   <h1>BROTHERS<br>KARAMAZOV</h1>
+  <p>MY THEATRE RECORD</p>
 </header>
 
 <main class="container">
