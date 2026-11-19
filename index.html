@@ -927,17 +927,26 @@ function selectSeat(floor, row, number){
   renderSeatMap();
 }
 
-// 좌석표 그리기
-function renderSeatMap(){
-  const map=document.getElementById("seatMap");
-  if(!map)return;
+// 전체 관극 좌석표 층 상태
+let archiveSeatFloor = "1층";
 
-  const range=(start,end)=>{
-    return Array.from(
-      {length:end-start+1},
-      (_,i)=>i+start
-    );
-  };
+// MY SEATS 층 전환
+function setArchiveFloor(floor){
+  archiveSeatFloor = floor;
+
+  document.getElementById("archiveFloor1Button")
+    .classList.toggle("active",floor==="1층");
+
+  document.getElementById("archiveFloor2Button")
+    .classList.toggle("active",floor==="2층");
+
+  renderArchiveSeatMap();
+}
+
+// 공통 좌석 배치 그리기
+function createSeatMap(floor, mode="select"){
+  const range=(start,end)=>
+    Array.from({length:end-start+1},(_,i)=>i+start);
 
   const rows1=[
     [[],[9,10,11],[]],
@@ -964,30 +973,41 @@ function renderSeatMap(){
     [range(1,8),range(9,24),range(25,33)]
   ];
 
-  const rows=currentSeatFloor==="1층"?rows1:rows2;
-  const floor=currentSeatFloor;
+  const rows=floor==="1층"?rows1:rows2;
+  const attendedSeats=schedules
+    .filter(s=>s.watched&&s.seat&&s.seat.floor===floor)
+    .map(s=>s.seat);
 
   let html=`<div class="seat-stage">STAGE</div>`;
 
-  // 1층 휠체어석
   if(floor==="1층"){
     html+=`<div class="seat-wheelchair">`;
 
     for(let i=1;i<=5;i++){
       const number="D"+i;
-      const isSelected=
-        selectedSeat &&
-        selectedSeat.floor===floor &&
-        selectedSeat.row==="휠체어석" &&
-        selectedSeat.number===number;
+      const occupied=attendedSeats.some(seat=>
+        seat.row==="휠체어석"&&String(seat.number)===number
+      );
 
-      html+=`
-        <button type="button"
-          style="${isSelected?'background:var(--plum);color:white;':''}"
-          onclick="selectSeat('1층','휠체어석','${number}')">
-          ${number}
-        </button>
-      `;
+      if(mode==="select"){
+        const isSelected=selectedSeat&&
+          selectedSeat.floor===floor&&
+          selectedSeat.row==="휠체어석"&&
+          String(selectedSeat.number)===number;
+
+        html+=`
+          <button type="button"
+            style="${isSelected?'background:var(--plum);color:white;':''}"
+            onclick="selectSeat('1층','휠체어석','${number}')">
+            ${number}
+          </button>`;
+      }else{
+        html+=`
+          <button type="button" disabled
+            style="${occupied?'background:var(--plum);color:white;':''}">
+            ${number}
+          </button>`;
+      }
     }
 
     html+=`</div>`;
@@ -999,38 +1019,54 @@ function renderSeatMap(){
     html+=`
       <div class="seat-row">
         <div class="seat-row-label">${index+1}열</div>
-        <div class="seat-blocks">
-    `;
+        <div class="seat-blocks">`;
 
     blocks.forEach(block=>{
       html+=`<div class="seat-block">`;
 
       block.forEach(number=>{
-        const isSelected=
-          selectedSeat &&
-          selectedSeat.floor===floor &&
-          selectedSeat.row===row &&
-          String(selectedSeat.number)===String(number);
+        const occupied=attendedSeats.some(seat=>
+          seat.row===row&&String(seat.number)===String(number)
+        );
 
-        html+=`
-          <button type="button"
-            class="seat-cell ${isSelected?'selected':''}"
-            onclick="selectSeat('${floor}','${row}','${number}')">
-            ${number}
-          </button>
-        `;
+        if(mode==="select"){
+          const isSelected=selectedSeat&&
+            selectedSeat.floor===floor&&
+            selectedSeat.row===row&&
+            String(selectedSeat.number)===String(number);
+
+          html+=`
+            <button type="button"
+              class="seat-cell ${isSelected?'selected':''}"
+              onclick="selectSeat('${floor}','${row}','${number}')">
+              ${number}
+            </button>`;
+        }else{
+          html+=`
+            <button type="button"
+              class="seat-cell ${occupied?'selected':''}"
+              disabled
+              title="${occupied?'관극한 좌석':'미관극 좌석'}">
+              ${number}
+            </button>`;
+        }
       });
 
       html+=`</div>`;
     });
 
-    html+=`
-        </div>
-      </div>
-    `;
+    html+=`</div></div>`;
   });
 
-  map.innerHTML=html;
+  return html;
+}
+
+// 일정별 좌석 선택표
+function renderSeatMap(){
+  const map=document.getElementById("seatMap");
+  if(!map)return;
+
+  map.innerHTML=createSeatMap(currentSeatFloor,"select");
 
   if(selectedSeat){
     document.getElementById("seatSelection").textContent=
@@ -1039,6 +1075,14 @@ function renderSeatMap(){
     document.getElementById("seatSelection").textContent=
       "좌석표에서 관람한 자리를 선택해 줘.";
   }
+}
+
+// MY SEATS 전체 관극 좌석표
+function renderArchiveSeatMap(){
+  const map=document.getElementById("archiveSeatMap");
+  if(!map)return;
+
+  map.innerHTML=createSeatMap(archiveSeatFloor,"archive");
 }
 function openSeatModal(id){
   activeScheduleId=id;
