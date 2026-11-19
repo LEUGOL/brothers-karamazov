@@ -1216,36 +1216,41 @@ header p{
 </section>
 
   <section class="section">
-    <div class="section-title">
-      <h2>MY NOTES</h2>
-      <span class="kicker">REVIEW</span>
+  <div class="section-title">
+    <h2>MY NOTES</h2>
+    <span class="kicker">REVIEW</span>
+  </div>
+
+  <p class="notes-intro">
+    공연이 끝난 뒤, 오래 기억하고 싶은 순간들을 기록하는 나만의 공간
+  </p>
+
+  <div class="notes-editor">
+    <label for="noteSchedule">관람한 공연</label>
+    <select id="noteSchedule" onchange="loadNoteForSchedule()">
+      <option value="">관극한 공연을 선택해 주세요.</option>
+    </select>
+
+    <label>오늘의 별점</label>
+    <div id="noteRating">
+      <button type="button" class="rating-star" onclick="selectNoteRating(1)">☆</button>
+      <button type="button" class="rating-star" onclick="selectNoteRating(2)">☆</button>
+      <button type="button" class="rating-star" onclick="selectNoteRating(3)">☆</button>
+      <button type="button" class="rating-star" onclick="selectNoteRating(4)">☆</button>
+      <button type="button" class="rating-star" onclick="selectNoteRating(5)">☆</button>
     </div>
 
-    <div class="form-grid">
-      <div class="field">
-        <label>관람 날짜</label>
-        <select id="noteSchedule"></select>
-      </div>
-    <div class="field">
-  <label>오늘의 별점</label>
-  <div id="noteRating" class="rating-stars">
-    <button type="button" class="rating-star" onclick="selectNoteRating(1)">☆</button>
-    <button type="button" class="rating-star" onclick="selectNoteRating(2)">☆</button>
-    <button type="button" class="rating-star" onclick="selectNoteRating(3)">☆</button>
-    <button type="button" class="rating-star" onclick="selectNoteRating(4)">☆</button>
-    <button type="button" class="rating-star" onclick="selectNoteRating(5)">☆</button>
+    <label for="noteScene">기억하고 싶은 장면</label>
+    <textarea id="noteScene" placeholder="오늘 가장 기억에 남았던 장면은?"></textarea>
+
+    <label for="noteMemo">오늘의 감상</label>
+    <textarea id="noteMemo" rows="5" placeholder="배우의 표정, 대사, 무대, 감정 등 자유롭게 기록해 보세요."></textarea>
+
+    <button class="notes-save" onclick="addNote()">감상 기록 저장</button>
   </div>
-</div>
-      <div class="field full">
-        <label>기억하고 싶은 장면 / 후기</label>
-        <textarea id="noteText" placeholder="오늘 공연에서 기억하고 싶은 장면을 적어줘."></textarea>
-      </div>
-    </div>
-    <div class="actions">
-      <button class="btn" onclick="addNote()">후기 저장</button>
-    </div>
-    <div id="notesList" style="margin-top:18px"></div>
-  </section>
+
+  <div id="notesList" class="notes-list"></div>
+</section>
 
   <section class="section">
     <div class="section-title">
