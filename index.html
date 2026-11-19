@@ -984,19 +984,21 @@ const castMembers = [
   }
 ];
 
+
 function renderActors(){
   const container = document.getElementById("actorStats");
   if(!container) return;
 
   container.innerHTML = castMembers.map(member => {
-    const actorStats = member.actors.map(actor => {
+    const roleKey = roles.find(([key, role]) => role === member.role)?.[0];
+
+    const actors = member.actors.map(actor => {
       const count = schedules.filter(schedule =>
-        schedule.watched &&
-        schedule[roles.find(([key, role]) => role === member.role)?.[0]] === actor
+        schedule.watched && schedule[roleKey] === actor
       ).length;
 
       return `
-        <div class="actor-card">
+        <div class="actor-row">
           <span class="actor-name">${actor}</span>
           <span class="actor-count">${count}회</span>
         </div>
@@ -1006,13 +1008,14 @@ function renderActors(){
     return `
       <div class="actor-role-group">
         <h3>${member.role}</h3>
-        <div class="actor-grid">
-          ${actorStats}
+        <div class="actor-list">
+          ${actors}
         </div>
       </div>
     `;
   }).join("");
 }
+
 
 function renderCast(){
   const box = document.getElementById("castMembers");
