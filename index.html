@@ -1063,16 +1063,27 @@ function renderActors(){
 }
 
 
+
 function renderCast(){
   const box = document.getElementById("castMembers");
+  if(!box) return;
 
   box.innerHTML = castMembers.map(member => `
-    <div class="actor-card">
+    <div class="cast-role-card">
       <strong>${member.role}</strong>
-      <span>${member.actors.length ? member.actors.join(" · ") : "배우 명단 준비 중"}</span>
+      <div class="cast-actor-list">
+        ${
+          member.actors.length
+            ? member.actors.map(actor => `
+                <span class="cast-actor">${actor}</span>
+              `).join("")
+            : `<span class="cast-empty">배우 명단 준비 중</span>`
+        }
+      </div>
     </div>
   `).join("");
 }
+
 
 function renderSeats(){
   const box=document.getElementById("seatArchive");
