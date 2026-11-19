@@ -692,15 +692,14 @@ footer{
     <div id="seatModalDate" style="font-size:13px;margin-bottom:16px;color:var(--muted)"></div>
 
      
-<div class="seat-floor-tabs">
-  <button type="button" id="floor1Button"
-    class="active" onclick="setSeatFloor('1층')">1층</button>
-  <button type="button" id="floor2Button"
-    onclick="setSeatFloor('2층')">2층</button>
+<h3 class="seat-floor-heading">1층</h3>
+<div class="seat-map-wrap">
+  <div class="seat-map" id="seatMap1"></div>
 </div>
 
+<h3 class="seat-floor-heading">2층</h3>
 <div class="seat-map-wrap">
-  <div class="seat-map" id="seatMap"></div>
+  <div class="seat-map" id="seatMap2"></div>
 </div>
 
 <div class="seat-selection" id="seatSelection">
