@@ -349,14 +349,16 @@ footer{
 
 .seat-blocks{
   flex:1;
-  display:flex;
+  display:grid;
+  grid-template-columns: max-content max-content max-content;
   justify-content:center;
-  gap:14px;
+  column-gap:14px;
 }
 
 .seat-block{
   display:flex;
   gap:2px;
+  min-width:0;
 }
 
 .seat-cell{
@@ -376,15 +378,6 @@ footer{
 
 .seat-cell:disabled{
   opacity:.35;
-}
-
-.seat-selection{
-  margin-top:14px;
-  padding:12px;
-  background:#F0EAF2;
-  color:var(--purple);
-  font-size:12px;
-  text-align:center;
 }
 /* 휠체어석 */
 .seat-wheelchair{
