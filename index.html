@@ -694,27 +694,28 @@ footer{
 #archiveSeatMap2 .seat-cell{
   cursor:default;
 }
-  /* MY NOTES STAR RATING */
-.note-rating{
+/* MY NOTES STAR RATING */
+.rating-stars{
   display:flex;
-  gap:7px;
-  align-items:center;
+  justify-content:flex-start;
+  gap:0;
+  white-space:nowrap;
+  margin-top:4px;
 }
 
 .rating-star{
   border:0;
   background:transparent;
-  padding:2px;
   color:#65566B;
-  font-size:28px;
+  font-size:25px;
+  line-height:1;
+  padding:2px 3px;
   cursor:pointer;
-  transition:color .15s ease, transform .15s ease;
 }
 
 .rating-star.selected{
   color:#C1A5C8;
 }
-
 .rating-star:hover{
   transform:scale(1.15);
 }
@@ -846,19 +847,14 @@ footer{
         <label>관람 날짜</label>
         <select id="noteSchedule"></select>
       </div>
-     <div class="field">
-  <label>별점</label>
-  <div class="note-rating" id="noteRatingButtons">
-    <button type="button" class="rating-star selected"
-      onclick="setNoteRating(1)">★</button>
-    <button type="button" class="rating-star selected"
-      onclick="setNoteRating(2)">★</button>
-    <button type="button" class="rating-star selected"
-      onclick="setNoteRating(3)">★</button>
-    <button type="button" class="rating-star selected"
-      onclick="setNoteRating(4)">★</button>
-    <button type="button" class="rating-star selected"
-      onclick="setNoteRating(5)">★</button>
+    <div class="field">
+  <label>오늘의 별점</label>
+  <div id="noteRating" class="rating-stars">
+    <button type="button" class="rating-star" onclick="selectNoteRating(1)">☆</button>
+    <button type="button" class="rating-star" onclick="selectNoteRating(2)">☆</button>
+    <button type="button" class="rating-star" onclick="selectNoteRating(3)">☆</button>
+    <button type="button" class="rating-star" onclick="selectNoteRating(4)">☆</button>
+    <button type="button" class="rating-star" onclick="selectNoteRating(5)">☆</button>
   </div>
 </div>
       <div class="field full">
