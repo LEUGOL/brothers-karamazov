@@ -334,31 +334,141 @@ tr.attended td:first-child{
 
 .seat-item strong{color:#D0BBD5}
 
-.note-card{
-  border:1px solid var(--line);
-  padding:15px;
-  margin-bottom:10px;
-  background:#19151F;
-}
-
-.note-head{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:8px;
-}
-
-.note-head strong{color:#D0BBD5}
-
-.stars{color:#B49AAF;letter-spacing:2px}
-
-.note-card p{
-  white-space:pre-wrap;
-  font-size:13px;
+/* MY NOTES */
+.notes-intro{
+  color:var(--muted);
+  font-size:12px;
   line-height:1.7;
-  margin:8px 0 0;
-  color:#D3C9D6;
+  margin:0 0 14px;
+}
+.notes-editor{
+  background:#F0EAF2;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:12px;
+  margin-bottom:16px;
+}
+.notes-editor label{
+  display:block;
+  color:var(--purple);
+  font-size:12px;
+  font-weight:bold;
+  margin:12px 0 6px;
+}
+.notes-editor label:first-child{margin-top:0}
+.notes-editor select,
+.notes-editor textarea{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:6px;
+  background:#FCFAFC;
+  color:var(--black);
+  padding:10px;
+  font:inherit;
+  font-size:13px;
+}
+.notes-editor textarea{
+  resize:vertical;
+  line-height:1.7;
+  min-height:75px;
+}
+.notes-editor textarea:focus,
+.notes-editor select:focus{
+  outline:2px solid var(--plum);
+  outline-offset:1px;
+}
+.notes-save{
+  width:100%;
+  margin-top:12px;
+  padding:10px;
+  background:var(--purple);
+  color:white;
+}
+.notes-list{
+  display:grid;
+  gap:10px;
+}
+.note-card{
+  background:#FCFAFC;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:12px;
+}
+.note-date{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:5px;
+}
+.note-title{
+  font-size:14px;
+  font-weight:bold;
+  color:var(--purple);
+}
+.note-cast{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:5px;
+}
+.note-stars{
+  color:var(--plum);
+  letter-spacing:2px;
+  margin-top:8px;
+}
+.note-content{
+  font-size:13px;
+  line-height:1.8;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  margin-top:10px;
+}
+.note-label{
+  font-size:11px;
+  font-weight:bold;
+  color:var(--plum);
+  margin-top:10px;
+}
+.note-actions{
+  display:flex;
+  gap:6px;
+  margin-top:12px;
+}
+.note-actions button{
+  font-size:11px;
+  padding:7px 12px;
+}
+.note-empty{
+  color:var(--muted);
+  text-align:center;
+  padding:18px 5px;
+  font-size:12px;
+  line-height:1.7;
+}
+
+/* 별점 */
+#noteRating{
+  display:flex;
+  justify-content:center;
+  gap:3px;
+  margin-top:4px;
+}
+#noteRating .rating-star{
+  border:0;
+  background:transparent;
+  color:#B9AABD;
+  font-size:23px;
+  line-height:1;
+  padding:3px 5px;
+}
+#noteRating .rating-star.selected{
+  color:var(--plum);
+}
+
+/* MY NOTES 모바일 */
+@media(max-width:600px){
+  .notes-editor{padding:10px}
+  .note-card{padding:11px}
+  .note-title{font-size:13px}
+  .note-content{font-size:12px}
 }
 
 footer{
