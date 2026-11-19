@@ -879,16 +879,28 @@ function saveSchedule(){
 
 function openSeatModal(id){
   activeScheduleId=id;
+
   const s=getSchedule(id);
   if(!s)return;
+
   document.getElementById("seatModalDate").textContent=
     formatDate(s.date)+" · "+(s.time||"");
-  document.getElementById("seatFloor").value=s.seat?.floor||"1층";
-  document.getElementById("seatRow").value=s.seat?.row||"";
-  document.getElementById("seatNumber").value=s.seat?.number||"";
-  document.getElementById("seatModal").classList.add("show");
-}
 
+  document.getElementById("seatFloor").value=
+    s.seat?.floor||"1층";
+
+  document.getElementById("seatRow").value=
+    s.seat?.row||"";
+
+  document.getElementById("seatNumber").value=
+    s.seat?.number||"";
+
+  document.getElementById("seatModal").classList.add("show");
+
+  renderSeatMap();
+
+  setSeatFloor(s.seat?.floor||"1층");
+}
 function closeSeatModal(){
   document.getElementById("seatModal").classList.remove("show");
   activeScheduleId=null;
