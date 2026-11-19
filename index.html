@@ -347,10 +347,11 @@ footer{
   color:var(--muted);
 }
 
+
 .seat-blocks{
   flex:1;
   display:grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr) minmax(0, 1fr);
   justify-content:stretch;
   column-gap:14px;
   min-width:0;
@@ -358,10 +359,26 @@ footer{
 
 .seat-block{
   display:flex;
-  justify-content:center;
   gap:2px;
   min-width:0;
 }
+
+/* 좌블: 중블 방향으로 정렬 */
+.seat-blocks > .seat-block:nth-child(1){
+  justify-content:flex-end;
+}
+
+/* 중블: 중앙 정렬 */
+.seat-blocks > .seat-block:nth-child(2){
+  justify-content:center;
+}
+
+/* 우블: 중블 방향으로 정렬 */
+.seat-blocks > .seat-block:nth-child(3){
+  justify-content:flex-start;
+}
+
+/* 1층 1열 중블 */
 .first-row-center{
   width:100%;
 }
@@ -377,6 +394,7 @@ footer{
   display:flex;
   gap:2px;
 }
+
 .seat-cell{
   width:19px;
   height:19px;
