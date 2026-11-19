@@ -876,7 +876,60 @@ function saveSchedule(){
   document.querySelectorAll("#scheduleModal input").forEach(i=>i.value="");
   render();
 }
+// 좌석 선택 상태
+let selectedSeat = null;
+let currentSeatFloor = "1층";
 
+// 층 전환
+function setSeatFloor(floor){
+  currentSeatFloor = floor;
+
+  document.getElementById("seatFloor").value = floor;
+
+  document.getElementById("floor1Button")
+    .classList.toggle("active", floor === "1층");
+
+  document.getElementById("floor2Button")
+    .classList.toggle("active", floor === "2층");
+
+  renderSeatMap();
+}
+
+// 좌석 선택
+function selectSeat(floor, row, number){
+  selectedSeat = {floor, row, number};
+
+  document.getElementById("seatFloor").value = floor;
+  document.getElementById("seatRow").value = row;
+  document.getElementById("seatNumber").value = number;
+
+  document.getElementById("seatSelection").textContent =
+    `${floor} ${row}열 ${number}번 선택`;
+
+  renderSeatMap();
+}
+
+// 좌석표 그리기
+function renderSeatMap(){
+  const map = document.getElementById("seatMap");
+
+  if(!map) return;
+
+  map.innerHTML = `
+    <div class="seat-stage">STAGE</div>
+    <div class="empty">
+      좌석 배치 데이터를 연결하는 중이야.
+    </div>
+  `;
+
+  if(selectedSeat){
+    document.getElementById("seatSelection").textContent =
+      `${selectedSeat.floor} ${selectedSeat.row}열 ${selectedSeat.number}번 선택`;
+  }else{
+    document.getElementById("seatSelection").textContent =
+      "좌석표에서 관람한 자리를 선택해 줘.";
+  }
+}
 function openSeatModal(id){
   activeScheduleId=id;
 
