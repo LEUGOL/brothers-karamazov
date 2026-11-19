@@ -945,6 +945,7 @@ function setArchiveFloor(floor){
 }
 
 // 공통 좌석 배치 그리기
+
 function createSeatMap(floor, mode="select"){
   const range=(start,end)=>
     Array.from({length:end-start+1},(_,i)=>i+start);
@@ -975,44 +976,12 @@ function createSeatMap(floor, mode="select"){
   ];
 
   const rows=floor==="1층"?rows1:rows2;
+
   const attendedSeats=schedules
     .filter(s=>s.watched&&s.seat&&s.seat.floor===floor)
     .map(s=>s.seat);
 
   let html=`<div class="seat-stage">STAGE</div>`;
-
-  if(floor==="1층"){
-    html+=`<div class="seat-wheelchair">`;
-
-    for(let i=1;i<=5;i++){
-      const number="D"+i;
-      const occupied=attendedSeats.some(seat=>
-        seat.row==="휠체어석"&&String(seat.number)===number
-      );
-
-      if(mode==="select"){
-        const isSelected=selectedSeat&&
-          selectedSeat.floor===floor&&
-          selectedSeat.row==="휠체어석"&&
-          String(selectedSeat.number)===number;
-
-        html+=`
-          <button type="button"
-            style="${isSelected?'background:var(--plum);color:white;':''}"
-            onclick="selectSeat('1층','휠체어석','${number}')">
-            ${number}
-          </button>`;
-      }else{
-        html+=`
-          <button type="button" disabled
-            style="${occupied?'background:var(--plum);color:white;':''}">
-            ${number}
-          </button>`;
-      }
-    }
-
-    html+=`</div>`;
-  }
 
   rows.forEach((blocks,index)=>{
     const row=(index+1)+"열";
@@ -1061,6 +1030,7 @@ function createSeatMap(floor, mode="select"){
 
   return html;
 }
+
 
 // 일정별 좌석 선택표
 function renderSeatMap(){
