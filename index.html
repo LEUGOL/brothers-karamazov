@@ -265,27 +265,51 @@ tr.attended td:first-child{
   gap:9px;
 }
 
-.actor-card{
-  border:1px solid #45374B;
-  border-radius:5px;
-  padding:15px;
-  background:#19151F;
+
+#castMembers{
+  display:grid;
+  grid-template-columns:repeat(6, minmax(125px, 1fr));
+  gap:12px;
+  overflow-x:auto;
+  padding:8px 2px 14px;
 }
 
-.actor-card strong{
+.cast-role-card{
+  min-width:125px;
+  padding:12px;
+  background:rgba(25,21,31,0.92);
+  border:1px solid #45374B;
+  border-radius:10px;
+}
+
+.cast-role-card strong{
   display:block;
+  margin-bottom:12px;
+  padding-bottom:9px;
+  border-bottom:1px solid #514657;
   font-size:14px;
   color:#D0BBD5;
   letter-spacing:.5px;
 }
 
-.actor-card span{
+.cast-actor-list{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.cast-actor{
   display:block;
-  margin-top:8px;
   color:#B9AEBB;
   font-size:12px;
-  line-height:1.6;
+  line-height:1.5;
 }
+
+.cast-empty{
+  color:#8F8493;
+  font-size:12px;
+}
+
 
 .seat-summary{
   display:grid;
