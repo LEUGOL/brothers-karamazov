@@ -1022,8 +1022,7 @@ function createSeatMap(floor, mode="select"){
   let html=`<div class="seat-stage">STAGE</div>`;
 
 rows.forEach((blocks,index)=>{
-  const row=index+1;
-
+const row=String(index+1);
   const rowClass = floor==="1층" && index===0
     ? "seat-row first-row"
     : "seat-row";
@@ -1038,8 +1037,8 @@ rows.forEach((blocks,index)=>{
 
     numbers.forEach(number=>{
       const occupied=attendedSeats.some(seat=>
-        seat.row===row&&String(seat.number)===String(number)
-      );
+  String(seat.row)===row&&String(seat.number)===String(number)
+);
 
       if(mode==="select"){
         const isSelected=selectedSeat&&
