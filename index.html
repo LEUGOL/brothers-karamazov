@@ -603,10 +603,9 @@ function renderSchedules(){
 
 function renderStats(){
   document.getElementById("totalCount").textContent=schedules.length;
+
   document.getElementById("watchedCount").textContent=
     schedules.filter(s=>s.watched).length;
-  document.getElementById("seatCount").textContent=
-    schedules.filter(s=>s.watched && s.seat).length;
 }
 
 const castMembers = [
