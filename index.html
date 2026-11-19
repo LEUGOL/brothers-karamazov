@@ -822,16 +822,21 @@ footer{
         <label>관람 날짜</label>
         <select id="noteSchedule"></select>
       </div>
-      <div class="field">
-        <label>별점</label>
-        <select id="noteRating">
-          <option value="5">★★★★★</option>
-          <option value="4">★★★★☆</option>
-          <option value="3">★★★☆☆</option>
-          <option value="2">★★☆☆☆</option>
-          <option value="1">★☆☆☆☆</option>
-        </select>
-      </div>
+     <div class="field">
+  <label>별점</label>
+  <div class="note-rating" id="noteRatingButtons">
+    <button type="button" class="rating-star selected"
+      onclick="setNoteRating(1)">★</button>
+    <button type="button" class="rating-star selected"
+      onclick="setNoteRating(2)">★</button>
+    <button type="button" class="rating-star selected"
+      onclick="setNoteRating(3)">★</button>
+    <button type="button" class="rating-star selected"
+      onclick="setNoteRating(4)">★</button>
+    <button type="button" class="rating-star selected"
+      onclick="setNoteRating(5)">★</button>
+  </div>
+</div>
       <div class="field full">
         <label>기억하고 싶은 장면 / 후기</label>
         <textarea id="noteText" placeholder="오늘 공연에서 기억하고 싶은 장면을 적어줘."></textarea>
