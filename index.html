@@ -350,13 +350,15 @@ footer{
 .seat-blocks{
   flex:1;
   display:grid;
-  grid-template-columns: max-content max-content max-content;
-  justify-content:center;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content:stretch;
   column-gap:14px;
+  min-width:0;
 }
 
 .seat-block{
   display:flex;
+  justify-content:center;
   gap:2px;
   min-width:0;
 }
