@@ -1580,18 +1580,7 @@ function saveSeat(){
   closeSeatModal();
   render();
 }
-let noteRating = 0;
 
-function selectNoteRating(score){
-  noteRating = score;
-
-  const stars = document.querySelectorAll("#noteRating .rating-star");
-
-  stars.forEach((star, index)=>{
-    star.textContent = index < score ? "★" : "☆";
-    star.classList.toggle("selected", index < score);
-  });
-}
 function addNote(){
   const scheduleId=document.getElementById("noteSchedule").value;
   const text=document.getElementById("noteText").value.trim();
