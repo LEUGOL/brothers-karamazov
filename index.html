@@ -975,13 +975,16 @@ const STORAGE = {
 let schedules = JSON.parse(localStorage.getItem(STORAGE.schedules) || "[]");
 let notes = JSON.parse(localStorage.getItem(STORAGE.notes) || "[]");
 let activeScheduleId = null;
-let noteRating = 5;
+let noteRating = 0;
 
-function setNoteRating(value){
-  noteRating = value;
+function selectNoteRating(score){
+  noteRating = score;
 
-  document.querySelectorAll(".rating-star").forEach((star,index)=>{
-    star.classList.toggle("selected",index < value);
+  const stars = document.querySelectorAll("#noteRating .rating-star");
+
+  stars.forEach((star,index)=>{
+    star.textContent = index < score ? "★" : "☆";
+    star.classList.toggle("selected",index < score);
   });
 }
 const roles = [
