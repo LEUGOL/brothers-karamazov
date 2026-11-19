@@ -1,1 +1,824 @@
 
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17131D">
+<title>BROTHERS KARAMAZOV | MY THEATRE RECORD</title>
+
+<style>
+*{box-sizing:border-box}
+:root{
+  --black:#17131D;
+  --deep:#241B2B;
+  --purple:#302039;
+  --plum:#49304F;
+  --lilac:#B49AAF;
+  --pale:#E9E1E9;
+  --paper:#F5F0F5;
+  --line:#D9CEDB;
+  --muted:#897D8E;
+  --white:#FFFDFE;
+}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--black);
+  font-family:"Noto Serif KR","Batang",serif;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+header{
+  background:linear-gradient(145deg,var(--black),var(--purple));
+  color:var(--pale);
+  padding:48px 20px 38px;
+  text-align:center;
+  border-bottom:4px solid var(--lilac);
+}
+.eyebrow{
+  font:11px Arial,sans-serif;
+  letter-spacing:4px;
+  color:var(--lilac);
+}
+header h1{
+  font-size:clamp(25px,5vw,42px);
+  letter-spacing:2px;
+  line-height:1.35;
+  margin:18px 0 8px;
+}
+header p{
+  font-size:11px;
+  letter-spacing:3px;
+  color:#C8B9CB;
+}
+.container{
+  width:min(100% - 28px,1050px);
+  margin:28px auto 60px;
+}
+.section{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:3px;
+  padding:22px;
+  margin-bottom:18px;
+  box-shadow:0 5px 18px rgba(35,24,40,.045);
+}
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  border-bottom:1px solid var(--line);
+  padding-bottom:12px;
+  margin-bottom:18px;
+}
+.section-title h2{
+  margin:0;
+  font-size:17px;
+  letter-spacing:1px;
+  color:var(--purple);
+}
+.kicker{
+  font:10px Arial,sans-serif;
+  letter-spacing:2px;
+  color:var(--muted);
+}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+.stat{
+  background:var(--deep);
+  color:var(--pale);
+  text-align:center;
+  padding:19px 8px;
+}
+.stat small{
+  display:block;
+  font-size:11px;
+  color:var(--lilac);
+  margin-bottom:9px;
+}
+.stat strong{
+  font-size:27px;
+  font-weight:normal;
+}
+.stat span{font-size:12px}
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.field{min-width:0}
+.field.full{grid-column:1/-1}
+label{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+input,select,textarea{
+  width:100%;
+  min-width:0;
+  border:1px solid var(--line);
+  background:#FCFAFC;
+  border-radius:2px;
+  padding:10px;
+  color:var(--black);
+  outline:none;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--plum);
+}
+textarea{resize:vertical;min-height:90px}
+.btn{
+  border:1px solid var(--plum);
+  background:var(--purple);
+  color:white;
+  padding:10px 15px;
+  font-size:12px;
+  letter-spacing:.5px;
+}
+.btn.light{
+  background:transparent;
+  color:var(--purple);
+}
+.btn.danger{
+  border-color:#9B626C;
+  background:#9B626C;
+}
+.btn.small{padding:6px 9px;font-size:11px}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:14px;
+}
+.table-wrap{overflow-x:auto}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:650px;
+  font-size:12px;
+}
+th{
+  background:var(--deep);
+  color:var(--pale);
+  font-weight:normal;
+  padding:11px 8px;
+  white-space:nowrap;
+}
+td{
+  border-bottom:1px solid #EAE3EB;
+  padding:10px 8px;
+  text-align:center;
+}
+tr.attended{background:#F2EAF3}
+tr.attended td:first-child{border-left:3px solid var(--plum)}
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:28px 10px;
+  font-size:13px;
+}
+.schedule-tools{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:14px;
+}
+.schedule-tools input{flex:1;min-width:130px}
+.actor-list{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+}
+.actor-card{
+  border:1px solid var(--line);
+  padding:13px;
+  background:#FCFAFC;
+}
+.actor-card strong{font-size:13px;color:var(--purple)}
+.actor-card span{
+  display:block;
+  margin-top:7px;
+  color:var(--muted);
+  font-size:12px;
+}
+.seat-summary{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+.seat-item{
+  border:1px solid var(--line);
+  padding:12px;
+  background:#FCFAFC;
+  font-size:12px;
+}
+.seat-item strong{color:var(--purple)}
+.note-card{
+  border:1px solid var(--line);
+  padding:15px;
+  margin-bottom:10px;
+  background:#FCFAFC;
+}
+.note-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:8px;
+}
+.note-head strong{color:var(--purple)}
+.stars{color:#755D7C;letter-spacing:2px}
+.note-card p{
+  white-space:pre-wrap;
+  font-size:13px;
+  line-height:1.7;
+  margin:8px 0 0;
+}
+footer{
+  text-align:center;
+  padding:25px 10px;
+  color:var(--muted);
+  font:10px Arial,sans-serif;
+  letter-spacing:2px;
+}
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:20;
+  background:rgba(15,10,18,.72);
+  padding:18px;
+  align-items:center;
+  justify-content:center;
+}
+.modal.show{display:flex}
+.modal-box{
+  background:var(--paper);
+  width:min(100%,520px);
+  max-height:90vh;
+  overflow:auto;
+  padding:22px;
+  border:1px solid var(--lilac);
+}
+.modal-title{
+  color:var(--purple);
+  font-size:18px;
+  margin:0 0 18px;
+}
+.checkline{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  margin-top:12px;
+}
+.checkline input{width:auto}
+@media(max-width:600px){
+  header{padding:38px 14px 30px}
+  .container{width:calc(100% - 20px);margin-top:16px}
+  .section{padding:16px;margin-bottom:12px}
+  .stats{gap:6px}
+  .stat{padding:15px 4px}
+  .stat strong{font-size:23px}
+  .stat small{font-size:10px}
+  .form-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .actor-list{grid-template-columns:1fr}
+  .seat-summary{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="eyebrow">FYODOR DOSTOEVSKY</div>
+  <h1>BROTHERS<br>KARAMAZOV</h1>
+  <p>MY THEATRE RECORD</p>
+</header>
+
+<main class="container">
+
+  <section class="section">
+    <div class="section-title">
+      <h2>MY RECORD</h2>
+      <span class="kicker">ATTENDANCE</span>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <small>전체 등록 회차</small>
+        <strong id="totalCount">0</strong><span> 회</span>
+      </div>
+      <div class="stat">
+        <small>나의 관극 횟수</small>
+        <strong id="watchedCount">0</strong><span> 회</span>
+      </div>
+      <div class="stat">
+        <small>관람 좌석 수</small>
+        <strong id="seatCount">0</strong><span> 석</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">
+      <h2>PERFORMANCE SCHEDULE</h2>
+      <span class="kicker">SCHEDULE</span>
+    </div>
+
+    <div class="schedule-tools">
+      <input type="search" id="searchSchedule" placeholder="날짜 또는 배우 검색">
+      <select id="filterSchedule">
+        <option value="all">전체 일정</option>
+        <option value="watched">관극 완료</option>
+        <option value="unwatched">미관극</option>
+      </select>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>시간</th>
+            <th>표도르</th>
+            <th>드미트리</th>
+            <th>이반</th>
+            <th>알료샤</th>
+            <th>스메르자코프</th>
+            <th>파이시우스</th>
+            <th>관극</th>
+            <th>좌석</th>
+          </tr>
+        </thead>
+        <tbody id="scheduleBody"></tbody>
+      </table>
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="openScheduleModal()">+ 공연 일정 추가</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">
+      <h2>MY ACTOR COUNT</h2>
+      <span class="kicker">ACTORS</span>
+    </div>
+    <div class="actor-list" id="actorStats"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">
+      <h2>MY SEATS</h2>
+      <span class="kicker">SEAT ARCHIVE</span>
+    </div>
+    <p style="font-size:12px;color:var(--muted);line-height:1.7">
+      실제 관람한 공연의 좌석을 날짜별로 모아 보여줘.
+      층·열·번호는 관극 기록에서 입력할 수 있어.
+    </p>
+    <div class="seat-summary" id="seatArchive"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">
+      <h2>MY NOTES</h2>
+      <span class="kicker">REVIEW</span>
+    </div>
+
+    <div class="form-grid">
+      <div class="field">
+        <label>관람 날짜</label>
+        <select id="noteSchedule"></select>
+      </div>
+      <div class="field">
+        <label>별점</label>
+        <select id="noteRating">
+          <option value="5">★★★★★</option>
+          <option value="4">★★★★☆</option>
+          <option value="3">★★★☆☆</option>
+          <option value="2">★★☆☆☆</option>
+          <option value="1">★☆☆☆☆</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label>기억하고 싶은 장면 / 후기</label>
+        <textarea id="noteText" placeholder="오늘 공연에서 기억하고 싶은 장면을 적어줘."></textarea>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="addNote()">후기 저장</button>
+    </div>
+    <div id="notesList" style="margin-top:18px"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">
+      <h2>DATA ARCHIVE</h2>
+      <span class="kicker">BACKUP</span>
+    </div>
+    <p style="font-size:12px;color:var(--muted);line-height:1.7">
+      기록은 이 기기의 브라우저에 저장돼.
+      기기를 바꾸거나 브라우저 데이터를 삭제하기 전에는 백업 파일을 만들어 줘.
+    </p>
+    <div class="actions">
+      <button class="btn" onclick="exportData()">기록 내보내기</button>
+      <button class="btn light" onclick="document.getElementById('importFile').click()">기록 불러오기</button>
+      <input type="file" id="importFile" accept=".json" hidden onchange="importData(event)">
+    </div>
+  </section>
+
+</main>
+
+<footer>BROTHERS KARAMAZOV · MY THEATRE ARCHIVE</footer>
+
+<div class="modal" id="scheduleModal">
+  <div class="modal-box">
+    <h3 class="modal-title">공연 일정 등록</h3>
+    <div class="form-grid">
+      <div class="field">
+        <label>공연 날짜</label>
+        <input type="date" id="newDate">
+      </div>
+      <div class="field">
+        <label>공연 시간</label>
+        <input type="time" id="newTime">
+      </div>
+      <div class="field">
+        <label>표도르</label>
+        <input id="newFyodor" placeholder="배우 이름">
+      </div>
+      <div class="field">
+        <label>드미트리</label>
+        <input id="newDmitri" placeholder="배우 이름">
+      </div>
+      <div class="field">
+        <label>이반</label>
+        <input id="newIvan" placeholder="배우 이름">
+      </div>
+      <div class="field">
+        <label>알료샤</label>
+        <input id="newAlyosha" placeholder="배우 이름">
+      </div>
+      <div class="field">
+        <label>스메르자코프</label>
+        <input id="newSmerdyakov" placeholder="배우 이름">
+      </div>
+      <div class="field">
+        <label>파이시우스</label>
+        <input id="newPaisius" placeholder="배우 이름">
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="saveSchedule()">일정 저장</button>
+      <button class="btn light" onclick="closeScheduleModal()">닫기</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="seatModal">
+  <div class="modal-box">
+    <h3 class="modal-title">관극 및 좌석 기록</h3>
+    <div id="seatModalDate" style="font-size:13px;margin-bottom:16px;color:var(--muted)"></div>
+    <div class="form-grid">
+      <div class="field">
+        <label>층</label>
+        <select id="seatFloor">
+          <option value="1층">1층</option>
+          <option value="2층">2층</option>
+          <option value="기타">기타</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>열</label>
+        <input id="seatRow" placeholder="예: B열">
+      </div>
+      <div class="field full">
+        <label>좌석 번호</label>
+        <input id="seatNumber" placeholder="예: 12번">
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="saveSeat()">관극 완료 저장</button>
+      <button class="btn light" onclick="closeSeatModal()">취소</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORAGE = {
+  schedules:"bk_records",
+  notes:"bk_notes"
+};
+
+let schedules = JSON.parse(localStorage.getItem(STORAGE.schedules) || "[]");
+let notes = JSON.parse(localStorage.getItem(STORAGE.notes) || "[]");
+let activeScheduleId = null;
+
+const roles = [
+  ["fyodor","표도르"],
+  ["dmitri","드미트리"],
+  ["ivan","이반"],
+  ["alyosha","알료샤"],
+  ["smerdyakov","스메르자코프"],
+  ["paisius","파이시우스"]
+];
+
+function saveAll(){
+  localStorage.setItem(STORAGE.schedules,JSON.stringify(schedules));
+  localStorage.setItem(STORAGE.notes,JSON.stringify(notes));
+}
+
+function makeId(){
+  return Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+}
+
+function formatDate(date){
+  if(!date)return "";
+  const d=new Date(date+"T00:00:00");
+  return `${date.replaceAll("-",".")} (${["일","월","화","수","목","금","토"][d.getDay()]})`;
+}
+
+function getSchedule(id){
+  return schedules.find(s=>s.id===id);
+}
+
+function render(){
+  renderSchedules();
+  renderStats();
+  renderActors();
+  renderSeats();
+  renderNoteOptions();
+  renderNotes();
+}
+
+function renderSchedules(){
+  const body=document.getElementById("scheduleBody");
+  const query=document.getElementById("searchSchedule").value.trim().toLowerCase();
+  const filter=document.getElementById("filterSchedule").value;
+
+  let list=[...schedules].sort((a,b)=>
+    (a.date+a.time).localeCompare(b.date+b.time)
+  );
+
+  list=list.filter(s=>{
+    const cast=roles.map(r=>s[r[0]]||"").join(" ").toLowerCase();
+    const matches=(s.date+" "+cast).toLowerCase().includes(query);
+    const status=filter==="all" ||
+      (filter==="watched" && s.watched) ||
+      (filter==="unwatched" && !s.watched);
+    return matches&&status;
+  });
+
+  if(!list.length){
+    body.innerHTML=`<tr><td colspan="10" class="empty">
+      등록된 공연 일정이 없어. 아래 버튼으로 일정을 추가해 줘.
+    </td></tr>`;
+    return;
+  }
+
+  body.innerHTML=list.map(s=>`
+    <tr class="${s.watched?"attended":""}">
+      <td>${formatDate(s.date)}</td>
+      <td>${s.time||"-"}</td>
+      ${roles.map(r=>`<td>${escapeHTML(s[r[0]]||"-")}</td>`).join("")}
+      <td>${s.watched?"✓":"-"}</td>
+      <td>
+        <button class="btn small ${s.watched?"light":""}"
+          onclick="openSeatModal('${s.id}')">
+          ${s.watched?"수정":"기록"}
+        </button>
+      </td>
+    </tr>
+  `).join("");
+}
+
+function renderStats(){
+  document.getElementById("totalCount").textContent=schedules.length;
+  document.getElementById("watchedCount").textContent=
+    schedules.filter(s=>s.watched).length;
+  document.getElementById("seatCount").textContent=
+    schedules.filter(s=>s.watched && s.seat).length;
+}
+
+function renderActors(){
+  const box=document.getElementById("actorStats");
+  box.innerHTML=roles.map(([key,label])=>{
+    const count=schedules.filter(s=>s.watched && s[key]).length;
+    return `<div class="actor-card">
+      <strong>${label}</strong>
+      <span>함께한 관극 ${count}회</span>
+    </div>`;
+  }).join("");
+}
+
+function renderSeats(){
+  const box=document.getElementById("seatArchive");
+  const list=schedules.filter(s=>s.watched&&s.seat)
+    .sort((a,b)=>a.date.localeCompare(b.date));
+
+  if(!list.length){
+    box.innerHTML=`<div class="empty" style="grid-column:1/-1">
+      아직 등록된 관극 좌석이 없어.
+    </div>`;
+    return;
+  }
+
+  box.innerHTML=list.map(s=>`
+    <div class="seat-item">
+      <strong>${formatDate(s.date)}</strong><br>
+      ${escapeHTML(s.seat.floor)} ${escapeHTML(s.seat.row)}
+      ${escapeHTML(s.seat.number)}
+    </div>
+  `).join("");
+}
+
+function renderNoteOptions(){
+  const select=document.getElementById("noteSchedule");
+  const previous=select.value;
+  select.innerHTML=`<option value="">공연 선택</option>`+
+    schedules.filter(s=>s.watched).map(s=>
+      `<option value="${s.id}">${formatDate(s.date)} ${s.time||""}</option>`
+    ).join("");
+  if(previous)select.value=previous;
+}
+
+function renderNotes(){
+  const box=document.getElementById("notesList");
+  if(!notes.length){
+    box.innerHTML=`<div class="empty">아직 작성한 후기가 없어.</div>`;
+    return;
+  }
+
+  box.innerHTML=[...notes].sort((a,b)=>b.created-a.created).map(n=>{
+    const s=getSchedule(n.scheduleId);
+    return `<div class="note-card">
+      <div class="note-head">
+        <strong>${s?formatDate(s.date):"공연 기록"}</strong>
+        <span class="stars">${"★".repeat(n.rating)}${"☆".repeat(5-n.rating)}</span>
+      </div>
+      <p>${escapeHTML(n.text)}</p>
+      <div class="actions">
+        <button class="btn small danger" onclick="deleteNote('${n.id}')">삭제</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function openScheduleModal(){
+  document.getElementById("scheduleModal").classList.add("show");
+}
+function closeScheduleModal(){
+  document.getElementById("scheduleModal").classList.remove("show");
+}
+
+function saveSchedule(){
+  const date=document.getElementById("newDate").value;
+  const time=document.getElementById("newTime").value;
+  if(!date||!time){
+    alert("공연 날짜와 시간을 입력해 줘.");
+    return;
+  }
+
+  const item={id:makeId(),date,time,watched:false,seat:null};
+  roles.forEach(([key])=>{
+    item[key]=document.getElementById("new"+key[0].toUpperCase()+key.slice(1)).value.trim();
+  });
+
+  schedules.push(item);
+  saveAll();
+  closeScheduleModal();
+  document.querySelectorAll("#scheduleModal input").forEach(i=>i.value="");
+  render();
+}
+
+function openSeatModal(id){
+  activeScheduleId=id;
+  const s=getSchedule(id);
+  if(!s)return;
+  document.getElementById("seatModalDate").textContent=
+    formatDate(s.date)+" · "+(s.time||"");
+  document.getElementById("seatFloor").value=s.seat?.floor||"1층";
+  document.getElementById("seatRow").value=s.seat?.row||"";
+  document.getElementById("seatNumber").value=s.seat?.number||"";
+  document.getElementById("seatModal").classList.add("show");
+}
+
+function closeSeatModal(){
+  document.getElementById("seatModal").classList.remove("show");
+  activeScheduleId=null;
+}
+
+function saveSeat(){
+  const s=getSchedule(activeScheduleId);
+  if(!s)return;
+
+  const row=document.getElementById("seatRow").value.trim();
+  const number=document.getElementById("seatNumber").value.trim();
+  if(!row||!number){
+    alert("열과 좌석 번호를 입력해 줘.");
+    return;
+  }
+
+  s.watched=true;
+  s.seat={
+    floor:document.getElementById("seatFloor").value,
+    row,number
+  };
+  saveAll();
+  closeSeatModal();
+  render();
+}
+
+function addNote(){
+  const scheduleId=document.getElementById("noteSchedule").value;
+  const text=document.getElementById("noteText").value.trim();
+  const rating=Number(document.getElementById("noteRating").value);
+
+  if(!scheduleId){
+    alert("후기를 작성할 공연을 선택해 줘.");
+    return;
+  }
+  if(!text){
+    alert("후기 내용을 입력해 줘.");
+    return;
+  }
+
+  notes.push({
+    id:makeId(),scheduleId,text,rating,created:Date.now()
+  });
+  saveAll();
+  document.getElementById("noteText").value="";
+  renderNotes();
+}
+
+function deleteNote(id){
+  if(!confirm("이 후기를 삭제할까?"))return;
+  notes=notes.filter(n=>n.id!==id);
+  saveAll();
+  renderNotes();
+}
+
+function exportData(){
+  const data={
+    project:"BROTHERS KARAMAZOV",
+    version:1,
+    schedules,
+    notes
+  };
+  const blob=new Blob(
+    [JSON.stringify(data,null,2)],
+    {type:"application/json"}
+  );
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="brothers-karamazov-record.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importData(event){
+  const file=event.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+
+  reader.onload=()=>{
+    try{
+      const data=JSON.parse(reader.result);
+      if(!Array.isArray(data.schedules)||!Array.isArray(data.notes)){
+        throw new Error("형식이 올바르지 않습니다.");
+      }
+      if(!confirm("현재 기록을 가져온 파일의 기록으로 교체할까?"))return;
+      schedules=data.schedules;
+      notes=data.notes;
+      saveAll();
+      render();
+      alert("기록을 불러왔어.");
+    }catch(e){
+      alert("파일을 읽을 수 없어. 백업 파일을 확인해 줘.");
+    }
+    event.target.value="";
+  };
+  reader.readAsText(file);
+}
+
+function escapeHTML(value){
+  return String(value??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+document.getElementById("searchSchedule").addEventListener("input",renderSchedules);
+document.getElementById("filterSchedule").addEventListener("change",renderSchedules);
+
+render();
+</script>
+</body>
+</html>
