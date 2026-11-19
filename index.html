@@ -1031,6 +1031,8 @@ function openSeatModal(id){
   document.getElementById("seatModalDate").textContent=
     formatDate(s.date)+" · "+(s.time||"");
 
+  selectedSeat = s.seat ? {...s.seat} : null;
+
   document.getElementById("seatFloor").value=
     s.seat?.floor||"1층";
 
@@ -1041,8 +1043,6 @@ function openSeatModal(id){
     s.seat?.number||"";
 
   document.getElementById("seatModal").classList.add("show");
-
-  renderSeatMap();
 
   setSeatFloor(s.seat?.floor||"1층");
 }
