@@ -1160,7 +1160,12 @@ document.getElementById("searchSchedule").addEventListener("input",renderSchedul
 document.getElementById("filterSchedule").addEventListener("change",renderSchedules);
 
 render();
-  setSeatFloor("1층");
+
+// 좌석표 미리보기
+document.getElementById("seatModalDate").textContent = "좌석표 미리보기";
+document.getElementById("seatModal").classList.add("show");
+setSeatFloor("1층");
+
 </script>
 </body>
 </html>
