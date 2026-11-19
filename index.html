@@ -1100,16 +1100,19 @@ rows.forEach((blocks,index)=>{
 }
 
 
-// 일정별 좌석 선택표
+// 일정별 좌석 선택표 - 1층과 2층 동시 표시
 function renderSeatMap(){
-  const map=document.getElementById("seatMap");
-  if(!map)return;
+  const map1=document.getElementById("seatMap1");
+  const map2=document.getElementById("seatMap2");
 
-  map.innerHTML=createSeatMap(currentSeatFloor,"select");
+  if(!map1||!map2)return;
+
+  map1.innerHTML=createSeatMap("1층","select");
+  map2.innerHTML=createSeatMap("2층","select");
 
   if(selectedSeat){
     document.getElementById("seatSelection").textContent=
-      `${selectedSeat.floor} ${selectedSeat.row} ${selectedSeat.number}번 선택`;
+      `${selectedSeat.floor} ${selectedSeat.row}열 ${selectedSeat.number}번 선택`;
   }else{
     document.getElementById("seatSelection").textContent=
       "좌석표에서 관람한 자리를 선택해 줘.";
