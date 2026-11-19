@@ -521,17 +521,35 @@ footer{
     </div>
   </section>
 
-  <section class="section">
-    <div class="section-title">
-      <h2>MY SEATS</h2>
-      <span class="kicker">SEAT ARCHIVE</span>
-    </div>
-    <p style="font-size:12px;color:var(--muted);line-height:1.7">
-      실제 관람한 공연의 좌석을 날짜별로 모아 보여줘.
-      층·열·번호는 관극 기록에서 입력할 수 있어.
-    </p>
-    <div class="seat-summary" id="seatArchive"></div>
-  </section>
+ <section class="section">
+  <div class="section-title">
+    <h2>MY SEATS</h2>
+    <span class="kicker">SEAT ARCHIVE</span>
+  </div>
+
+  <p style="font-size:12px;color:var(--muted);line-height:1.7">
+    지금까지 관람한 모든 공연의 좌석을 한눈에 확인할 수 있어.
+  </p>
+
+  <div class="seat-floor-tabs">
+    <button type="button" id="archiveFloor1Button"
+      class="active" onclick="setArchiveFloor('1층')">1층</button>
+    <button type="button" id="archiveFloor2Button"
+      onclick="setArchiveFloor('2층')">2층</button>
+  </div>
+
+  <div class="seat-map-wrap">
+    <div class="seat-map" id="archiveSeatMap"></div>
+  </div>
+
+  <div style="display:flex;gap:14px;flex-wrap:wrap;
+    margin:14px 0;font-size:11px;color:var(--muted)">
+    <span>■ 관극한 좌석</span>
+    <span>□ 미관극 좌석</span>
+  </div>
+
+  <div class="seat-summary" id="seatArchive"></div>
+</section>
 
   <section class="section">
     <div class="section-title">
