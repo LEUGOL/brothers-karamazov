@@ -979,12 +979,14 @@ function createSeatMap(floor, mode="select"){
   let html=`<div class="seat-stage">STAGE</div>`;
 
   rows.forEach((blocks,index)=>{
-    const row=(index+1)+"열";
+    const rowClass = floor==="1층" && index===0
+  ? "seat-row first-row"
+  : "seat-row";
 
-    html+=`
-      <div class="seat-row">
-        <div class="seat-row-label">${index+1}열</div>
-        <div class="seat-blocks">`;
+html+=`
+  <div class="${rowClass}">
+    <div class="seat-row-label">${index+1}열</div>
+    <div class="seat-blocks">`;
 
     blocks.forEach(block=>{
       html+=`<div class="seat-block">`;
