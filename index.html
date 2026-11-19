@@ -599,23 +599,29 @@ footer{
     <h3 class="modal-title">관극 및 좌석 기록</h3>
     <div id="seatModalDate" style="font-size:13px;margin-bottom:16px;color:var(--muted)"></div>
     <div class="form-grid">
-      <div class="field">
-        <label>층</label>
-        <select id="seatFloor">
-          <option value="1층">1층</option>
-          <option value="2층">2층</option>
-          <option value="기타">기타</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>열</label>
-        <input id="seatRow" placeholder="예: B열">
-      </div>
-      <div class="field full">
-        <label>좌석 번호</label>
-        <input id="seatNumber" placeholder="예: 12번">
-      </div>
-    </div>
+     
+<div class="seat-floor-tabs">
+  <button type="button" id="floor1Button"
+    class="active" onclick="setSeatFloor('1층')">1층</button>
+  <button type="button" id="floor2Button"
+    onclick="setSeatFloor('2층')">2층</button>
+</div>
+
+<div class="seat-map-wrap">
+  <div class="seat-map" id="seatMap"></div>
+</div>
+
+<div class="seat-selection" id="seatSelection">
+  좌석표에서 관람한 자리를 선택해 줘.
+</div>
+
+<select id="seatFloor" hidden>
+  <option value="1층">1층</option>
+  <option value="2층">2층</option>
+</select>
+<input type="hidden" id="seatRow">
+<input type="hidden" id="seatNumber">
+
     <div class="actions">
       <button class="btn" onclick="saveSeat()">관극 완료 저장</button>
       <button class="btn light" onclick="closeSeatModal()">취소</button>
