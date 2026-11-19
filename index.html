@@ -47,34 +47,41 @@ button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 
 header{
-  background:linear-gradient(
-    145deg,
-    rgba(16,13,20,0.76),
-    rgba(48,32,57,0.76)
-  );
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18,14,23,0.94),
+      rgba(53,37,61,0.90)
+    );
   color:var(--pale);
-  padding:48px 20px 38px;
+  padding:55px 20px 48px;
   text-align:center;
-  border-bottom:3px solid var(--plum);
+  border-bottom:1px solid #745C7C;
+  box-shadow:0 8px 28px rgba(0,0,0,.28);
 }
 
 .eyebrow{
-  font:11px Arial,sans-serif;
+  font:10px Arial,sans-serif;
   letter-spacing:4px;
-  color:var(--lilac);
+  color:#B49AAF;
 }
 
 header h1{
-  font-size:clamp(25px,5vw,42px);
-  letter-spacing:2px;
-  line-height:1.35;
-  margin:18px 0 8px;
+  font-size:clamp(27px,5vw,43px);
+  letter-spacing:3px;
+  line-height:1.4;
+  margin:22px 0 13px;
+  color:#E8DFEA;
+  font-weight:normal;
 }
 
 header p{
-  font-size:11px;
+  font:10px Arial,sans-serif;
   letter-spacing:3px;
   color:#B9AABD;
+  margin:0;
 }
 
 .container{
