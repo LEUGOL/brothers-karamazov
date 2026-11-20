@@ -1555,7 +1555,16 @@ function renderSchedules(){
     </tr>
   `).join("");
 }
+// 직접 관극 체크 / 체크 해제
+function toggleAttendance(id, checked){
+  const s = getSchedule(id);
+  if(!s) return;
 
+  s.watched = checked;
+
+  saveAll();
+  render();
+}
 function renderStats(){
   document.getElementById("totalCount").textContent=schedules.length;
 
