@@ -1962,15 +1962,15 @@ const row=String(index+1);
             onclick="selectSeat('${floor}','${row}','${number}')">
             ${number}
           </button>`;
-      }else{
-        seatHtml+=`
-          <button type="button"
-            class="seat-cell ${occupied?'selected':''}"
-            disabled
-            title=""
-            ${number}
-          </button>`;
-      }
+    }else{
+  seatHtml+=`
+    <button type="button"
+      class="seat-cell ${occupied?'selected':''}"
+      disabled
+      title="">
+      ${number}
+    </button>`;
+}
     });
 
     return seatHtml;
