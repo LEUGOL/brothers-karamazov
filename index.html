@@ -1537,13 +1537,21 @@ function renderSchedules(){
       <td>${formatDate(s.date)}</td>
       <td>${s.time||"-"}</td>
       ${roles.map(r=>`<td>${escapeHTML(s[r[0]]||"-")}</td>`).join("")}
-      <td>${s.watched?"✓":"-"}</td>
-      <td>
-        <button class="btn small ${s.watched?"light":""}"
-          onclick="openSeatModal('${s.id}')">
-          ${s.watched?"수정":"기록"}
-        </button>
-      </td>
+     <td>
+  <input
+    type="checkbox"
+    class="attendance-check"
+    ${s.watched ? "checked" : ""}
+    onchange="toggleAttendance('${s.id}', this.checked)"
+    aria-label="관극 완료 체크"
+  >
+</td>
+<td>
+  <button class="btn small"
+    onclick="openSeatModal('${s.id}')">
+    좌석
+  </button>
+</td>
     </tr>
   `).join("");
 }
