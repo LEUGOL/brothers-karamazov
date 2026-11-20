@@ -1765,7 +1765,23 @@ function makePerformanceDates(){
   return result;
 }
 
-const bulkScheduleData = makePerformanceDates();
+
+// 브라더스 까라마조프 전체 공연 일정
+// 확인된 회차만 등록
+
+const bulkScheduleData = [
+  // 날짜, 시간, 표도르, 드미트리, 이반,
+  // 알료샤, 스메르자코프, 피아니스트
+
+  ["2026-05-12","20:00","도창선","조풍래","유승현","김대현","최석진","조재철"],
+  ["2026-05-13","20:00","김주호","백인태","강정우","황민수","강하경","조재철"],
+  ["2026-05-14","20:00","심재현","조풍래","임강성","임태현","박두호","양찬영"],
+  ["2026-05-15","20:00","김주호","이형훈","유승현","이선우","최석진","양찬영"],
+  ["2026-05-16","15:00","도창선","백인태","강정우","김대현","강하경","조영훈"],
+  ["2026-05-16","19:00","도창선","이형훈","강정우","황민수","박두호","조재철"],
+  ["2026-05-17","14:00","심재현","백인태","유승현","임태현","강하경","조영훈"],
+  ["2026-05-17","18:00","심재현","백인태","임강성","황민수","최석진","조영훈"]
+];
 
 function importFullSchedule(){
 
@@ -1774,9 +1790,10 @@ function importFullSchedule(){
 
   bulkScheduleData.forEach(item => {
 
+    const [date,time,fyodor,dmitri,ivan,alyosha,smerdyakov,paisius] = item;
+
     const exists = schedules.some(s =>
-      s.date === item.date &&
-      s.time === item.time
+      s.date === date && s.time === time
     );
 
     if(exists){
@@ -1786,32 +1803,29 @@ function importFullSchedule(){
 
     schedules.push({
       id: makeId(),
-      date: item.date,
-      time: item.time,
+      date,
+      time,
       watched: false,
       seat: null,
-      fyodor: item.fyodor,
-      dmitri: item.dmitri,
-      ivan: item.ivan,
-      alyosha: item.alyosha,
-      smerdyakov: item.smerdyakov,
-      paisius: item.paisius
+      fyodor,
+      dmitri,
+      ivan,
+      alyosha,
+      smerdyakov,
+      paisius
     });
 
     added++;
   });
 
-  schedules.sort((a,b)=>
-    (a.date+a.time).localeCompare(b.date+b.time)
-  );
-
   saveAll();
   render();
 
   alert(
-    `일정 등록 완료!\n\n새로 추가: ${added}회\n중복 제외: ${skipped}회`
+    `일정 등록 완료!\n새로 추가: ${added}회\n중복 건너뜀: ${skipped}회`
   );
 }
+
 
 // 좌석 선택 상태
 let selectedSeat = null;
