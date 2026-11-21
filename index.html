@@ -1455,21 +1455,16 @@ function render(){
 
 function renderSchedules(){
   const body=document.getElementById("scheduleBody");
-  const query=document.getElementById("searchSchedule").value.trim().toLowerCase();
-  const filter=document.getElementById("filterSchedule").value;
+  const actorFilter=document.getElementById("actorFilter").value;
 
   let list=[...schedules].sort((a,b)=>
     (a.date+a.time).localeCompare(b.date+b.time)
   );
 
-  list=list.filter(s=>{
-    const cast=roles.map(r=>s[r[0]]||"").join(" ").toLowerCase();
-    const matches=(s.date+" "+cast).toLowerCase().includes(query);
-    const status=filter==="all" ||
-      (filter==="watched" && s.watched) ||
-      (filter==="unwatched" && !s.watched);
-    return matches&&status;
-  });
+ list=list.filter(s=>{
+  return !actorFilter ||
+    roles.some(([key])=>s[key]===actorFilter);
+});
 
   if(!list.length){
     body.innerHTML=`<tr><td colspan="10" class="empty">
@@ -1544,7 +1539,19 @@ const castMembers = [
     actors: ["조재철", "조영훈", "양찬영"]
   }
 ];
+function setupActorFilter(){
+  const select=document.getElementById("actorFilter");
 
+  const actors=[...new Set(
+    castMembers.flatMap(member=>member.actors)
+  )];
+
+  select.innerHTML=
+    `<option value="">전체 배우 보기</option>`+
+    actors.map(actor=>
+      `<option value="${escapeHTML(actor)}">${escapeHTML(actor)}</option>`
+    ).join("");
+}
 
 function renderActors(){
   const container = document.getElementById("actorStats");
@@ -2000,9 +2007,7 @@ function escapeHTML(value){
   }[c]));
 }
 
-document.getElementById("searchSchedule").addEventListener("input",renderSchedules);
-document.getElementById("filterSchedule").addEventListener("change",renderSchedules);
-
+setupActorFilter();
 render();
 
 </script>
