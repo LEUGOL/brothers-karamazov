@@ -1262,14 +1262,9 @@ th{
     </div>
 
 
-    <div class="schedule-tools">
-      <input type="search" id="searchSchedule" placeholder="날짜 또는 배우 검색">
-      <select id="filterSchedule">
-        <option value="all">전체 일정</option>
-        <option value="watched">관극 완료</option>
-        <option value="unwatched">미관극</option>
-      </select>
-    </div>
+   <select id="actorFilter" onchange="renderSchedules()">
+  <option value="">전체 배우 보기</option>
+</select>
 
     <div class="table-wrap">
       <table>
