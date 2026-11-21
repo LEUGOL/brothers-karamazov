@@ -2056,11 +2056,8 @@ setupActorFilter();
 render();
 
 </script>
-  <div class="actions" style="justify-content:center; margin:14px auto 25px;">
-  <button class="btn light"
-    onclick="document.getElementById('importFile').click()">
-    기록 불러오기
-  </button>
+<div class="actions">
+  <button class="secondary" onclick="document.getElementById('importFile').click()">기록 불러오기</button>
 
   <input
     id="importFile"
@@ -2070,9 +2067,7 @@ render();
     onchange="importData(event)"
   >
 
-  <button class="btn light" onclick="exportData()">
-    기록 저장
-  </button>
+  <button class="secondary" onclick="exportData()">기록 저장</button>
 </div>
 </body>
 </html>
