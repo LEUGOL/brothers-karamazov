@@ -1611,36 +1611,76 @@ function renderSeats(){
   const box=document.getElementById("seatArchive");
   box.innerHTML="";
 }
-function renderNoteOptions(){
-  const select=document.getElementById("noteSchedule");
-  const previous=select.value;
-  select.innerHTML=`<option value="">공연 선택</option>`+
-    schedules.filter(s=>s.watched).map(s=>
-      `<option value="${s.id}">${formatDate(s.date)} ${s.time||""}</option>`
-    ).join("");
-  if(previous)select.value=previous;
+function loadNoteForSchedule(){
+  const scheduleId=document.getElementById("noteSchedule").value;
+
+  const note=notes.find(n=>n.scheduleId===scheduleId);
+
+  document.getElementById("noteScene").value=
+    note?.scene||"";
+
+  document.getElementById("noteMemo").value=
+    note?.memo||note?.text||"";
+
+  noteRating=Number(note?.rating)||0;
+  selectNoteRating(noteRating);
 }
 
 function renderNotes(){
   const box=document.getElementById("notesList");
+
   if(!notes.length){
-    box.innerHTML=`<div class="empty">아직 작성한 후기가 없어.</div>`;
+    box.innerHTML=`<div class="note-empty">아직 작성한 후기가 없어.</div>`;
     return;
   }
 
-  box.innerHTML=[...notes].sort((a,b)=>b.created-a.created).map(n=>{
-    const s=getSchedule(n.scheduleId);
-    return `<div class="note-card">
-      <div class="note-head">
-        <strong>${s?formatDate(s.date):"공연 기록"}</strong>
-        <span class="stars">${"★".repeat(n.rating)}${"☆".repeat(5-n.rating)}</span>
-      </div>
-      <p>${escapeHTML(n.text)}</p>
-      <div class="actions">
-        <button class="btn small danger" onclick="deleteNote('${n.id}')">삭제</button>
-      </div>
-    </div>`;
-  }).join("");
+  box.innerHTML=[...notes]
+    .sort((a,b)=>b.created-a.created)
+    .map(n=>{
+      const s=getSchedule(n.scheduleId);
+
+      const cast=s
+        ? roles.map(([key,role])=>
+            s[key] ? `${role} ${s[key]}` : ""
+          ).filter(Boolean).join(" · ")
+        : "";
+
+      const rating=Number(n.rating)||0;
+      const scene=n.scene||"";
+      const memo=n.memo||n.text||"";
+
+      return `
+        <div class="note-card">
+          <div class="note-date">
+            ${s?formatDate(s.date):"공연 기록"}
+            ${s&&s.time?" · "+escapeHTML(s.time):""}
+          </div>
+
+          <div class="note-title">BROTHERS KARAMAZOV</div>
+
+          ${cast?`<div class="note-cast">${escapeHTML(cast)}</div>`:""}
+
+          <div class="note-stars">
+            ${"★".repeat(rating)}${"☆".repeat(5-rating)}
+          </div>
+
+          ${scene?`
+            <div class="note-label">기억하고 싶은 장면</div>
+            <div class="note-content">${escapeHTML(scene)}</div>
+          `:""}
+
+          ${memo?`
+            <div class="note-label">오늘의 감상</div>
+            <div class="note-content">${escapeHTML(memo)}</div>
+          `:""}
+
+          <div class="note-actions">
+            <button class="btn small danger"
+              onclick="deleteNote('${n.id}')">삭제</button>
+          </div>
+        </div>
+      `;
+    }).join("");
 }
 
 
