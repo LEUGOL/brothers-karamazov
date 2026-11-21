@@ -1482,7 +1482,30 @@ function formatDate(date){
 function getSchedule(id){
   return schedules.find(s=>s.id===id);
 }
+function renderNoteOptions(){
+  const select = document.getElementById("noteSchedule");
+  if(!select) return;
 
+  const previousValue = select.value;
+
+  const watchedSchedules = [...schedules]
+    .filter(s => s.watched)
+    .sort((a,b) =>
+      (b.date+b.time).localeCompare(a.date+a.time)
+    );
+
+  select.innerHTML =
+    `<option value="">관극한 공연을 선택해 주세요.</option>` +
+    watchedSchedules.map(s => `
+      <option value="${escapeHTML(s.id)}">
+        ${escapeHTML(formatDate(s.date))} · ${escapeHTML(s.time||"")}
+      </option>
+    `).join("");
+
+  if(watchedSchedules.some(s => s.id === previousValue)){
+    select.value = previousValue;
+  }
+}
 function render(){
   renderSchedules();
   renderStats();
