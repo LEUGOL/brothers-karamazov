@@ -2125,7 +2125,8 @@ function escapeHTML(value){
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[c]));
 }
-
+setupActorFilter();
+render();
 </script>
 <div class="actions">
   <button class="secondary" onclick="document.getElementById('importFile').click()">기록 불러오기</button>
