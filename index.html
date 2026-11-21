@@ -1617,6 +1617,7 @@ function setupActorFilter(){
     ).join("");
 }
 
+
 function renderActors(){
   const container = document.getElementById("actorStats");
   if(!container) return;
@@ -1625,14 +1626,19 @@ function renderActors(){
     const roleKey = roles.find(([key, role]) => role === member.role)?.[0];
 
     const actors = member.actors.map(actor => {
-      const count = schedules.filter(schedule =>
-        schedule.watched && schedule[roleKey] === actor
+      const actorSchedules = schedules.filter(schedule =>
+        schedule[roleKey] === actor
+      );
+
+      const total = actorSchedules.length;
+      const watched = actorSchedules.filter(schedule =>
+        schedule.watched
       ).length;
 
       return `
         <div class="actor-row">
-          <span class="actor-name">${actor}</span>
-          <span class="actor-count">${count}회</span>
+          <span class="actor-name">${escapeHTML(actor)}</span>
+          <span class="actor-count">${watched}/${total}</span>
         </div>
       `;
     }).join("");
@@ -1647,6 +1653,7 @@ function renderActors(){
     `;
   }).join("");
 }
+
 
 
 
