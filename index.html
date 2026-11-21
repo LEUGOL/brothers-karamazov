@@ -2069,7 +2069,42 @@ function escapeHTML(value){
 
 setupActorFilter();
 render();
+/* MY RECORD - 인간실격과 동일한 세로 배치 */
 
+.stats{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.stat{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+
+.stat strong{
+  display:block;
+  font-size:27px;
+  font-weight:normal;
+  line-height:1.3;
+}
+
+.stat span{
+  display:block;
+  font-size:12px;
+  line-height:1.5;
+}
+
+@media(max-width:600px){
+  .stat strong{
+    font-size:23px;
+  }
+
+  .stat span{
+    font-size:11px;
+  }
+}
 </script>
 <div class="actions">
   <button class="secondary" onclick="document.getElementById('importFile').click()">기록 불러오기</button>
