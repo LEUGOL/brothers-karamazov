@@ -1961,33 +1961,41 @@ function resetSeat(){
 
 function addNote(){
   const scheduleId=document.getElementById("noteSchedule").value;
-  const text=document.getElementById("noteText").value.trim();
+  const scene=document.getElementById("noteScene").value.trim();
+  const memo=document.getElementById("noteMemo").value.trim();
 
   if(!scheduleId){
     alert("후기를 작성할 공연을 선택해 줘.");
     return;
   }
 
-  if(!text){
-    alert("후기 내용을 입력해 줘.");
+  if(!scene&&!memo){
+    alert("기억하고 싶은 장면이나 감상을 입력해 줘.");
     return;
   }
 
-  notes.push({
-    id:makeId(),
-    scheduleId,
-    text,
-    rating:noteRating,
-    created:Date.now()
-  });
+  const existing=notes.find(n=>n.scheduleId===scheduleId);
+
+  if(existing){
+    existing.scene=scene;
+    existing.memo=memo;
+    existing.rating=noteRating;
+    existing.created=Date.now();
+  }else{
+    notes.push({
+      id:makeId(),
+      scheduleId,
+      scene,
+      memo,
+      rating:noteRating,
+      created:Date.now()
+    });
+  }
 
   saveAll();
-
-  document.getElementById("noteText").value="";
-noteRating=0;
-selectNoteRating(0);
-
   renderNotes();
+
+  alert("감상이 저장됐어.");
 }
 
 function deleteNote(id){
