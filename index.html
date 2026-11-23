@@ -2140,9 +2140,16 @@ function createSeatMap(floor, mode="select"){
 
   const rows=floor==="1층"?rows1:rows2;
 
-  const attendedSeats=schedules
-    .filter(s=>s.watched&&s.seat&&s.seat.floor===floor)
-    .map(s=>s.seat);
+ // 관극한 공연의 좌석별 이용 횟수 집계
+const seatCounts = {};
+
+schedules
+  .filter(s=>s.watched && s.seat && s.seat.floor===floor)
+  .forEach(s=>{
+    const key = `${String(s.seat.row)}-${String(s.seat.number)}`;
+
+    seatCounts[key] = (seatCounts[key] || 0) + 1;
+  });
 
  let html = floor==="1층"
   ? `<div class="seat-stage">STAGE</div>`
