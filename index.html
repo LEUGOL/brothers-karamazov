@@ -1703,7 +1703,12 @@ function importFullSchedule(){
     "smerdyakov",
     "paisius"
   ];
-
+// 기존에 잘못 저장된 08:00을 20:00으로 보정
+schedules.forEach(s=>{
+  if(s.time === "08:00"){
+    s.time = "20:00";
+  }
+});
   let added = 0;
 
   bulkScheduleData.trim().split("\n").forEach(line => {
