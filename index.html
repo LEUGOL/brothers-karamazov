@@ -546,6 +546,7 @@ footer{
 .modal.show{display:flex}
 
 .modal-box{
+  position:relative;
   background:#1C1722;
   width:min(100%,520px);
   max-height:90vh;
@@ -558,6 +559,11 @@ footer{
   .modal-box{
     width:min(95vw,1000px);
   }
+}
+  .close-btn{
+  position:absolute;
+  top:12px;
+  right:12px;
 }
 .modal-title{
   color:#D8C6DC;
@@ -1443,7 +1449,10 @@ textarea{
 
 <div class="actions">
   <button class="btn danger" onclick="resetSeat()">선택 초기화</button>
-  <button class="btn light" onclick="closeSeatModal()">닫기</button>
+ <div class="modal-box">
+  <button class="btn light close-btn" onclick="closeSeatModal()">닫기</button>
+
+  <h3 class="modal-title">관극 및 좌석 기록</h3>
 </div>
   </div>
 </div>
