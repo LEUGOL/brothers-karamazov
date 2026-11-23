@@ -1703,7 +1703,32 @@ function importFullSchedule(){
     "smerdyakov",
     "paisius"
   ];
-// 기존에 잘못 저장된 08:00을 20:00으로 보정
+// 7월 28일 중복 일정 정리
+const july28Duplicates = schedules.filter(s =>
+  s.date === "2026-07-28" &&
+  s.time === "20:00" &&
+  s.fyodor === "김주호" &&
+  s.dmitri === "서승원" &&
+  s.ivan === "안재영" &&
+  s.alyosha === "이선우" &&
+  s.smerdyakov === "이준우" &&
+  s.paisius === "조재철"
+);
+
+if(july28Duplicates.length > 1){
+  const keepSchedule =
+    july28Duplicates.find(s => s.watched) ||
+    july28Duplicates[0];
+
+  schedules = schedules.filter(s =>
+    !july28Duplicates.some(duplicate =>
+      duplicate.id === s.id &&
+      duplicate.id !== keepSchedule.id
+    )
+  );
+}
+
+// 기존 08:00을 20:00으로 보정
 schedules.forEach(s=>{
   if(s.time === "08:00"){
     s.time = "20:00";
