@@ -2177,12 +2177,13 @@ const row=String(index+1);
             onclick="selectSeat('${floor}','${row}','${number}')">
             ${number}
           </button>`;
-    }else{
+   }else{
   seatHtml+=`
     <button type="button"
-      class="seat-cell ${occupied?'selected':''}"
+      class="seat-cell ${count>0?'selected has-count':''}"
+      data-count="${count}"
       disabled
-      title="">
+      title="${count}회 관극">
       ${number}
     </button>`;
 }
