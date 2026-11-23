@@ -2109,26 +2109,27 @@ function setArchiveFloor(floor){
 
 // 공통 좌석 배치 그리기
 
+
 function createSeatMap(floor, mode="select"){
   const range=(start,end)=>
     Array.from({length:end-start+1},(_,i)=>i+start);
 
- const rows1=[
-  [[8,9,10,11],[],[21,22,23,24]],
-  [[6,7],range(8,24),[25,26]],
-  [[6,7],range(8,24),[25,26]],
-  [[5,6,7],range(8,24),[25,26,27]],
-  [[5,6,7],range(8,24),[25,26,27]],
-  [[4,5,6,7],range(8,24),[25,26,27,28]],
-  [[4,5,6,7],range(8,24),[25,26,27,28]],
-  [[3,4,5,6,7],range(8,24),[25,26,27,28,29]],
-  [[3,4,5,6,7],range(8,24),[25,26,27,28,29]],
-  [[2,3,4,5,6,7],range(8,24),[25,26,27,28,29,30]],
-  [[2,3,4,5,6,7],range(8,24),[25,26,27,28,29,30]],
-  [[1,2,3,4,5,6,7],range(8,24),range(25,31)],
-  [[1,2,3,4,5,6,7],range(8,24),range(25,31)],
-  [[1,2,3,4,5,6,7],[],range(25,31)]
-];
+  const rows1=[
+    [[8,9,10,11],[],[21,22,23,24]],
+    [[6,7],range(8,24),[25,26]],
+    [[6,7],range(8,24),[25,26]],
+    [[5,6,7],range(8,24),[25,26,27]],
+    [[5,6,7],range(8,24),[25,26,27]],
+    [[4,5,6,7],range(8,24),[25,26,27,28]],
+    [[4,5,6,7],range(8,24),[25,26,27,28]],
+    [[3,4,5,6,7],range(8,24),[25,26,27,28,29]],
+    [[3,4,5,6,7],range(8,24),[25,26,27,28,29]],
+    [[2,3,4,5,6,7],range(8,24),[25,26,27,28,29,30]],
+    [[2,3,4,5,6,7],range(8,24),[25,26,27,28,29,30]],
+    [[1,2,3,4,5,6,7],range(8,24),range(25,31)],
+    [[1,2,3,4,5,6,7],range(8,24),range(25,31)],
+    [[1,2,3,4,5,6,7],[],range(25,31)]
+  ];
 
   const rows2=[
     [range(3,8),range(9,24),range(25,31)],
@@ -2140,94 +2141,97 @@ function createSeatMap(floor, mode="select"){
 
   const rows=floor==="1층"?rows1:rows2;
 
- // 관극한 공연의 좌석별 이용 횟수 집계
-const seatCounts = {};
+  // 관극한 공연의 좌석별 이용 횟수 집계
+  const seatCounts={};
 
-schedules
-  .filter(s=>s.watched && s.seat && s.seat.floor===floor)
-  .forEach(s=>{
-    const key = `${String(s.seat.row)}-${String(s.seat.number)}`;
+  schedules.forEach(s=>{
+    if(!s.watched || !s.seat) return;
+    if(s.seat.floor!==floor) return;
 
-    seatCounts[key] = (seatCounts[key] || 0) + 1;
+    const row=String(s.seat.row);
+    const number=String(s.seat.number);
+
+    if(!row || !number) return;
+
+    const key=`${row}-${number}`;
+    seatCounts[key]=(seatCounts[key]||0)+1;
   });
 
- let html = floor==="1층"
-  ? `<div class="seat-stage">STAGE</div>`
-  : "";
+  let html=floor==="1층"
+    ? `<div class="seat-stage">STAGE</div>`
+    : "";
 
-rows.forEach((blocks,index)=>{
-const row=String(index+1);
-  const rowClass = floor==="1층" && index===0
-    ? "seat-row first-row"
-    : "seat-row";
+  rows.forEach((blocks,index)=>{
+    const row=String(index+1);
 
-  html+=`
-    <div class="${rowClass}">
-      <div class="seat-row-label">${index+1}열</div>
-      <div class="seat-blocks">`;
-
- function makeSeatButtons(numbers){
-  let seatHtml="";
-
-  numbers.forEach(number=>{
-    const count = seatCounts[`${row}-${number}`] || 0;
-
-      if(mode==="select"){
-        const isSelected=selectedSeat&&
-          selectedSeat.floor===floor&&
-          selectedSeat.row===row&&
-          String(selectedSeat.number)===String(number);
-
-        seatHtml+=`
-          <button type="button"
-            class="seat-cell ${isSelected?'selected':''}"
-            onclick="selectSeat('${floor}','${row}','${number}')">
-            ${number}
-          </button>`;
-   }else{
-  seatHtml+=`
-    <button type="button"
-      class="seat-cell ${count>0?'selected has-count':''}"
-      data-count="${count}"
-      disabled
-      title="${count}회 관극">
-      ${number}
-    </button>`;
-}
-    });
-
-    return seatHtml;
-  }
-
-  if(floor==="1층" && index===0){
+    const rowClass=floor==="1층" && index===0
+      ? "seat-row first-row"
+      : "seat-row";
 
     html+=`
-      <div class="seat-block"></div>
-      <div class="seat-block first-row-center">
-        <div class="seat-center-pair">
-          <div class="seat-group">
-            ${makeSeatButtons(blocks[0])}
-          </div>
-          <div class="seat-group">
-            ${makeSeatButtons(blocks[2])}
+      <div class="${rowClass}">
+        <div class="seat-row-label">${index+1}열</div>
+        <div class="seat-blocks">`;
+
+    function makeSeatButtons(numbers){
+      let seatHtml="";
+
+      numbers.forEach(number=>{
+        const key=`${row}-${String(number)}`;
+        const count=seatCounts[key]||0;
+
+        if(mode==="select"){
+          const isSelected=selectedSeat&&
+            selectedSeat.floor===floor&&
+            String(selectedSeat.row)===row&&
+            String(selectedSeat.number)===String(number);
+
+          seatHtml+=`
+            <button type="button"
+              class="seat-cell ${isSelected?'selected':''}"
+              onclick="selectSeat('${floor}','${row}','${number}')">
+              ${number}
+            </button>`;
+        }else{
+          seatHtml+=`
+            <button type="button"
+              class="seat-cell ${count>0?'selected has-count':''}"
+              data-count="${count}"
+              disabled
+              title="${count}회 관극">
+              ${number}
+            </button>`;
+        }
+      });
+
+      return seatHtml;
+    }
+
+    if(floor==="1층" && index===0){
+      html+=`
+        <div class="seat-block"></div>
+        <div class="seat-block first-row-center">
+          <div class="seat-center-pair">
+            <div class="seat-group">
+              ${makeSeatButtons(blocks[0])}
+            </div>
+            <div class="seat-group">
+              ${makeSeatButtons(blocks[2])}
+            </div>
           </div>
         </div>
-      </div>
-      <div class="seat-block"></div>`;
+        <div class="seat-block"></div>`;
+    }else{
+      blocks.forEach(block=>{
+        html+=`
+          <div class="seat-block">
+            ${makeSeatButtons(block)}
+          </div>`;
+      });
+    }
 
-  }else{
-
-    blocks.forEach(block=>{
-      html+=`
-        <div class="seat-block">
-          ${makeSeatButtons(block)}
-        </div>`;
-    });
-
-  }
-
-  html+=`</div></div>`;
-});
+    html+=`</div></div>`;
+  });
 
   return html;
 }
