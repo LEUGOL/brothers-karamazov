@@ -265,7 +265,36 @@ tr.attended td:first-child{
   flex-wrap:wrap;
   margin-bottom:14px;
 }
+/* PERFORMANCE SCHEDULE 내부 스크롤 */
+.schedule-scroll{
+  max-height:520px;
+  overflow-y:auto;
+  overflow-x:auto;
+  border:1px solid rgba(91,73,99,.45);
+  border-radius:6px;
+}
 
+/* 스크롤 중에도 표 제목 고정 */
+.schedule-scroll thead th{
+  position:sticky;
+  top:0;
+  z-index:2;
+}
+
+/* 스크롤바 디자인 */
+.schedule-scroll::-webkit-scrollbar{
+  width:7px;
+  height:7px;
+}
+
+.schedule-scroll::-webkit-scrollbar-thumb{
+  background:#695572;
+  border-radius:10px;
+}
+
+.schedule-scroll::-webkit-scrollbar-track{
+  background:rgba(23,19,29,.4);
+}
 .schedule-tools input{flex:1;min-width:130px}
 
 .actor-list{
@@ -1339,7 +1368,7 @@ textarea{
   <option value="">전체 배우 보기</option>
 </select>
 
-    <div class="table-wrap">
+    <div class="table-wrap schedule-scroll">
       <table>
         <thead>
           <tr>
