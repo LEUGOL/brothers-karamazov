@@ -1714,7 +1714,7 @@ function importFullSchedule(){
     const [month, day] = md.split("/");
 
     const date = `2026-${month.padStart(2,"0")}-${day.padStart(2,"0")}`;
-    const time = `${String(Number(hour) + (Number(hour) < 8 ? 12 : 0)).padStart(2,"0")}:00`;
+    const time = `${String(Number(hour) + (Number(hour) < 12 ? 12 : 0)).padStart(2,"0")}:00`;
 
     const exists = schedules.some(s =>
       s.date === date && s.time === time
