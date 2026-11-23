@@ -2037,7 +2037,8 @@ function setSeatFloor(floor){
   renderSeatMap();
 }
 
-// 좌석 선택
+
+// 좌석 선택 및 자동 저장
 function selectSeat(floor, row, number){
   selectedSeat = {floor, row, number};
 
@@ -2048,8 +2049,23 @@ function selectSeat(floor, row, number){
   document.getElementById("seatSelection").textContent =
     `${floor} ${row}열 ${number}번 선택`;
 
+  // 현재 공연 기록에 좌석 즉시 저장
+  const s = getSchedule(activeScheduleId);
+
+  if(s){
+    s.seat = {
+      floor,
+      row,
+      number
+    };
+
+    saveAll();
+    renderArchiveSeatMap();
+  }
+
   renderSeatMap();
 }
+
 
 // 전체 관극 좌석표 층 상태
 let archiveSeatFloor = "1층";
