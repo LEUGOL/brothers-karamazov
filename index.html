@@ -1315,6 +1315,30 @@ select,
 textarea{
   font-family:inherit;
 }
+  /* MY SEATS - 좌석별 관극 횟수 */
+#archiveSeatMap1 .seat-cell,
+#archiveSeatMap2 .seat-cell{
+  position:relative;
+}
+
+#archiveSeatMap1 .seat-cell.has-count::after,
+#archiveSeatMap2 .seat-cell.has-count::after{
+  content:attr(data-count);
+  position:absolute;
+  top:-7px;
+  right:-6px;
+  min-width:12px;
+  height:12px;
+  padding:0 2px;
+  border-radius:10px;
+  background:#C1A5C8;
+  color:#211B27;
+  font-size:8px;
+  font-weight:bold;
+  line-height:12px;
+  text-align:center;
+  z-index:2;
+}
 </style>
 </head>
 
@@ -2135,13 +2159,11 @@ const row=String(index+1);
       <div class="seat-row-label">${index+1}열</div>
       <div class="seat-blocks">`;
 
-  function makeSeatButtons(numbers){
-    let seatHtml="";
+ function makeSeatButtons(numbers){
+  let seatHtml="";
 
-    numbers.forEach(number=>{
-      const occupied=attendedSeats.some(seat=>
-  String(seat.row)===row&&String(seat.number)===String(number)
-);
+  numbers.forEach(number=>{
+    const count = seatCounts[`${row}-${number}`] || 0;
 
       if(mode==="select"){
         const isSelected=selectedSeat&&
